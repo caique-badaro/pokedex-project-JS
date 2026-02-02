@@ -1,0 +1,353 @@
+/* card pokémon */
+.card-pokemon {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc(25% - 0.75rem);
+  height: 496px;
+  background: var(--color-background-white-default);
+  border-radius: var(--radius-default);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1px solid var(--color-gray-primary-10);
+}
+.card-pokemon .card--image-id-fav {
+  color: var(--color-white-primary);
+  padding: 1.5rem;
+}
+.card-pokemon .card--image-id-fav .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-pokemon .card--image-id-fav .pokemon-image {
+  width: auto;
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-pokemon .card--image-id-fav .pokemon-image img {
+  object-fit: contain;
+  height: 100%;
+}
+/* ---- content */
+.card-pokemon .content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+.card-pokemon .content .name-type {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.name-type .pokemon-name .h6 {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-pokemon .content .name-type .pokemon-class {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.card-pokemon .content .pokemon-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-gray-primary-80);
+}
+.card-pokemon .content .pokemon-skills .skill {
+  display: flex;
+  gap: 0.5rem;
+  align-items: self-end;
+}
+.card-pokemon .content .pokemon-skills .skill img {
+  width: 20px;
+  opacity: 0.8;
+}
+.card-pokemon .content .pokemon-skills .skill p:nth-child(2) {
+  width: 100%;
+}
+
+/* bottom sheet pokemon */
+.bottom-sheet--card-pokemon[data-status="inactive"] {
+  display: none;
+}
+.bottom-sheet--card-pokemon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 680px;
+  background-color: var(--color-background-white-default);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-default);
+  overflow: hidden;
+  padding: 0 2.5rem;
+}
+.bottom-sheet--card-pokemon .card--image-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 2.5rem;
+  color: var(--color-white-primary);
+}
+.bottom-sheet--card-pokemon .card--image-content .card-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.bottom-sheet--card-pokemon .card--image-content .card-header .action-btn {
+  display: flex;
+  gap: 1rem;
+  z-index: 1;
+}
+.bottom-sheet--card-pokemon .card--image-content .row-content {
+  display: flex;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.bottom-sheet--card-pokemon .card--image-content .row-content .name-type {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex: 1 0 0;
+}
+.bottom-sheet--card-pokemon
+  .card--image-content
+  .row-content
+  .name-type
+  .pokemon-name,
+.bottom-sheet--card-pokemon
+  .card--image-content
+  .row-content
+  .name-type
+  .pokemon-class,
+.bottom-sheet--card-pokemon
+  .card--image-content
+  .row-content
+  .name-type
+  .pokemon-size {
+  display: flex;
+  gap: 0.5rem;
+}
+.bottom-sheet--card-pokemon
+  .card--image-content
+  .row-content
+  .name-type
+  .pokemon-size {
+  margin-top: 1rem;
+}
+.bottom-sheet--card-pokemon .card--image-content .row-content .image-pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 240px;
+  flex: 1;
+}
+.bottom-sheet--card-pokemon
+  .card--image-content
+  .row-content
+  .image-pokemon
+  img {
+  object-fit: none;
+  z-index: 1;
+}
+.bottom-sheet--card-pokemon .content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2.5rem;
+  padding: 2rem 2.5rem;
+  color: var(--color-gray-primary-80);
+}
+.bottom-sheet--card-pokemon .content .skills {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.bottom-sheet--card-pokemon .content-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.bottom-sheet--card-pokemon .pokemon-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
+  .card-pokemon {
+    flex: 0 0 calc(50% - 1rem);
+    height: auto;
+  }
+  .card-pokemon .card--image-id-fav {
+    color: var(--color-white-primary);
+    padding: 1rem;
+  }
+  .card-pokemon .card--image-id-fav .pokemon-image {
+    height: 88px;
+  }
+  .card-pokemon .card--image-id-fav .pokemon-image img {
+    object-fit: contain;
+    height: 100%;
+  }
+  /* ---- content */
+  .card-pokemon .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .name-type .pokemon-name .h6 {
+    font-size: 1rem;
+  }
+
+  .card-pokemon .content .pokemon-skills {
+    flex-direction: row;
+    gap: 0.25rem;
+    justify-content: space-between;
+  }
+  .card-pokemon .content .pokemon-skills .skill {
+    width: 32px;
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-pokemon .content .pokemon-skills .skill img {
+    width: 20px;
+    opacity: 0.8;
+  }
+  .card-pokemon .content .pokemon-skills .skill p:nth-child(2) {
+    display: none;
+  }
+
+  /* bottom sheet pokemon */
+  .bottom-sheet--card-pokemon {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 5%;
+    border-radius: var(--radius-default) var(--radius-default) 0 0;
+    position: fixed;
+    bottom: 0;
+    height: 80dvh;
+  }
+  .bottom-sheet--card-pokemon .card--image-content .row-content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .bottom-sheet--card-pokemon .card--image-content .row-content .name-type {
+    width: 100%;
+    align-items: center;
+  }
+  .bottom-sheet--card-pokemon .card--image-content .row-content .name-type {
+    width: 100%;
+    align-items: center;
+  }
+  .bottom-sheet--card-pokemon .card--image-content .row-content .name-type .h2 {
+    font-size: 1.75rem;
+  }
+  .bottom-sheet--card-pokemon
+    .card--image-content
+    .row-content
+    .name-type
+    .pokemon-class
+    .tag-class
+    .body-larger {
+    display: flex;
+  }
+  .bottom-sheet--card-pokemon
+    .card--image-content
+    .row-content
+    .name-type
+    .pokemon-class {
+    position: absolute;
+    left: 1.25rem;
+    top: 7.5rem;
+    flex-direction: column;
+  }
+  .bottom-sheet--card-pokemon
+    .card--image-content
+    .row-content
+    .name-type
+    .pokemon-size {
+    margin-top: 0.5rem;
+    position: absolute;
+    right: 1.25rem;
+    top: 7.5rem;
+    flex-direction: column;
+  }
+  .bottom-sheet--card-pokemon
+    .card--image-content
+    .row-content
+    .name-type
+    .pokemon-size
+    .size-info {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 100;
+    padding: 0.25rem 0.5rem;
+  }
+  .bottom-sheet--card-pokemon
+    .card--image-content
+    .row-content
+    .name-type
+    .pokemon-size
+    .size-info
+    .h6 {
+    font-size: 14px;
+  }
+  .bottom-sheet--card-pokemon .card--image-content .row-content .image-pokemon {
+    margin: 1rem;
+  }
+  .bottom-sheet--card-pokemon
+    .card--image-content
+    .row-content
+    .image-pokemon
+    img {
+    object-fit: contain;
+    max-width: 140px;
+  }
+  .bottom-sheet--card-pokemon .content {
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 0 5% 8% 5%;
+    margin-top: 8%;
+    overflow-y: scroll;
+  }
+  .bottom-sheet--card-pokemon .content .skills .h6 {
+    font-size: 20px;
+  }
+  .bottom-sheet--card-pokemon .content .skills {
+    gap: 1.5rem;
+  }
+  .bottom-sheet--card-pokemon .pokemon-skills {
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .bottom-sheet--card-pokemon
+    .content
+    .skills:nth-child(2)
+    .content-box:nth-child(2) {
+    flex-direction: row;
+  }
+  .bottom-sheet--card-pokemon
+    .content
+    .skills:nth-child(2)
+    .content-box:nth-child(2)
+    .special-skill {
+    flex: 1;
+  }
+}

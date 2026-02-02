@@ -1,0 +1,83 @@
+/* bg classe pokemon */
+.fire {
+  background: var(--color-pokemon-background-fire);
+}
+.water {
+  background: var(--color-pokemon-background-water);
+}
+.grass {
+  background: var(--color-pokemon-background-grass);
+}
+.eletric {
+  background: var(--color-pokemon-background-electric);
+}
+.psychic {
+  background: var(--color-pokemon-background-psychic);
+}
+.ice {
+  background: var(--color-pokemon-background-ice);
+}
+.dragon {
+  background: var(--color-pokemon-background-dragon);
+}
+.ghost {
+  background: var(--color-pokemon-background-ghost);
+}
+.fairy {
+  background: var(--color-pokemon-background-fairy);
+}
+.normal {
+  background: var(--color-pokemon-background-normal);
+}
+.fighting {
+  background: var(--color-pokemon-background-fighting);
+}
+.flying {
+  background: var(--color-pokemon-background-flying);
+}
+.poison {
+  background: var(--color-pokemon-background-poison);
+}
+.ground {
+  background: var(--color-pokemon-background-ground);
+}
+.rock {
+  background: var(--color-pokemon-background-rock);
+}
+.bug {
+  background: var(--color-pokemon-background-bug);
+}
+.steel {
+  background: var(--color-pokemon-background-steel);
+}
+
+/* class filter */
+.filter-class {
+  display: flex;
+}
+/* ---- tag classe */
+.tag-class {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.tag-class .icon-class-pk {
+  width: 1.25rem;
+  height: auto;
+}
+.tag-class .body-larger {
+  color: var(--color-background-white-default);
+  line-height: 100%;
+  margin-top: 0.125rem;
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
+  /* ---- tag classe */
+  .tag-class .body-larger {
+    display: none;
+  }
+}
