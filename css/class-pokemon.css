@@ -8,7 +8,7 @@
 .grass {
   background: var(--color-pokemon-background-grass);
 }
-.eletric {
+.electric {
   background: var(--color-pokemon-background-electric);
 }
 .psychic {
@@ -59,7 +59,7 @@
 .tag-class {
   display: flex;
   gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.5rem;
   align-items: center;
   width: fit-content;
   border-radius: 999px;
