@@ -1,3 +1,6 @@
-import { pokeapi} from './modules/pokeapi.js';
+import { pokeapi, loadMore, createCard } from "./modules/pokeapi.js";
 
 pokeapi();
+// await createCard();
+await loadMore();
+await loadMore();

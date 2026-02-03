@@ -48,6 +48,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.name-type .pokemon-name .h6::first-letter {
+  text-transform: uppercase;
+}
 .card-pokemon .content .name-type .pokemon-class {
   display: flex;
   gap: 0.5rem;
@@ -183,6 +186,19 @@
   flex-direction: column;
   gap: 0.75rem;
 }
+.animate-pokemon {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  height: 100%;
+  border-radius: var(--radius-default);
+  background: var(--color-background-content-box);
+}
+.animate-pokemon .img-gif {
+  height: 4rem;
+}
 
 @media (min-width: 200px) and (max-width: 768px) {
   .card-pokemon {
@@ -240,6 +256,7 @@
     position: fixed;
     bottom: 0;
     height: 80dvh;
+    z-index: 2;
   }
   .bottom-sheet--card-pokemon .card--image-content .row-content {
     flex-direction: column-reverse;

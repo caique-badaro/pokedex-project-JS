@@ -1,25 +1,130 @@
-export function pokeapi() {
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-    .then((r) => r.json())
-    .then((data) => {
-      const arr = data.results.map((pokemon, index) => ({
-        id: index + 1,
-        nome: pokemon.name,
-        url: pokemon.url,
-      }));
+export async function pokeapi(offset = 0, limit = 20) {
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
+  );
+  const data = await response.json();
 
-      return Promise.all(
-        arr.map((pokemon) =>
-          fetch(pokemon.url)
-            .then((r) => r.json())
-            .then((info) => ({
-              ...pokemon,
-              img: info.sprites.other.dream_world.front_default,
-            })),
-        ),
-      );
-    })
-    .then((pokemonsComImagem) => {
-      console.log(pokemonsComImagem);
-    });
+  const includeData = await Promise.all(
+    data.results.map(async (pokemon) => {
+      const r = await fetch(pokemon.url);
+      const info = await r.json();
+
+      return {
+        id: info.id,
+        name: info.name,
+        img: info.sprites.other.dream_world.front_default,
+        gifFront: info.sprites.other.showdown.front_default,
+        gifBack: info.sprites.other.showdown.back_default,
+        ability: info.abilities.map((a) => a.ability.name),
+        height: info.height / 10,
+        weight: info.weight / 10,
+        power: info.stats
+          .map((a) => a.base_stat)
+          .reduce((acc, value) => acc + value, 0),
+        skills: info.stats.map((a) => ({
+          [a.stat.name]: a.base_stat,
+        })),
+        types: info.types.map((a) => a.type.name),
+      };
+    }),
+  );
+  return includeData;
+}
+
+const cardsList = document.getElementById("grid-cards");
+
+export async function createCard(pokemonsInfo) {
+  // percorrer array para gerar cards
+  pokemonsInfo.forEach((pokemon) => {
+    const card = document.createElement("div");
+    card.classList.add("card-pokemon");
+
+    // conteúdo card
+    card.innerHTML = `
+        <div class="card--image-id-fav ${pokemon.types[0]}">
+          <div class="card-header">
+            <div class="tag-id">
+              <p class="body-larger text-bold">#${pokemon.id}</p>
+            </div>
+            <button class="btn-favorite">
+              <img src="icons/white_favorite.svg" alt="Favoritar" />
+            </button>
+          </div>
+          <div class="pokemon-image">
+            <img src="${pokemon.img}" alt="${pokemon.name}" title="${pokemon.name}" />
+          </div>
+        </div>
+        <div class="content">
+          <div class="name-type">
+            <div class="pokemon-name">
+              <h6 class="h6 text-bold">${pokemon.name}</h6>
+            </div>
+            <div class="pokemon-class">
+              ${
+                pokemon.types[0]
+                  ? `
+              <div class="tag-class ${pokemon.types[0]}">
+                <img
+                  class="icon-class-pk"
+                  src="icons/white_mode_heat.svg"
+                  alt="${pokemon.types[0]}" />
+                <p class="body-larger text-bold">${pokemon.types[0]}</p>
+              </div>`
+                  : ""
+              }
+              ${
+                pokemon.types[1]
+                  ? `
+              <div class="tag-class ${pokemon.types[1]}">
+                <img
+                  class="icon-class-pk"
+                  src="icons/white_mode_heat.svg"
+                  alt="${pokemon.types[1]}" />
+                <p class="body-larger text-bold">${pokemon.types[1]}</p>
+              </div>`
+                  : ""
+              }
+            </div>
+          </div>
+          <div class="pokemon-skills">
+            <div class="skill">
+              <img src="icons/gray_vital_signs.svg" alt="${Object.keys(pokemon.skills[0])}" />
+              <p class="body-default">HP</p>
+              <p class="body-default">${pokemon.skills[0].hp}</p>
+            </div>
+            <div class="skill">
+              <img src="icons/gray_swords.svg" alt="${Object.keys(pokemon.skills[1])}" />
+              <p class="body-default">ATK</p>
+              <p class="body-default">${pokemon.skills[1].attack}</p>
+            </div>
+            <div class="skill">
+              <img src="icons/gray_shield.svg" alt="${Object.keys(pokemon.skills[2])}" />
+              <p class="body-default">DEF</p>
+              <p class="body-default">${pokemon.skills[2].defense}</p>
+            </div>
+          </div>
+          <div class="pokemon-power">
+            <div class="power">
+              <p class="body-larger text-bold">Poder total</p>
+              <p class="body-larger text-bold">${pokemon.power}</p>
+            </div>
+            <div class="power-bar">
+              <div style="width: ${(pokemon.power / 600) * 100 + "%"}" class="value ${pokemon.types[0]}"></div>
+            </div>
+          </div>
+        </div>
+    `;
+
+    // adiciona o card dentro do grid
+    cardsList.appendChild(card);
+  });
+}
+
+let offset = 0;
+const LIMIT = 20;
+
+export async function loadMore() {
+  const pokemons = await pokeapi(offset, LIMIT);
+  createCard(pokemons);
+  offset += LIMIT;
 }
