@@ -80,4 +80,7 @@
   .tag-class .body-larger {
     display: none;
   }
+  .tag-class {
+    padding: 0.25rem 0.5rem;
+  }
 }

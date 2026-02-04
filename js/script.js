@@ -1,6 +1,6 @@
-import { pokeapi, loadMore, createCard } from "./modules/pokeapi.js";
+import { pokeapi } from "./modules/pokeapi.js";
+import { loadMore } from "./modules/loadMore.js";
+import {} from "./modules/filterPokemon.js";
 
 pokeapi();
-// await createCard();
-await loadMore();
 await loadMore();
