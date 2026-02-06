@@ -254,9 +254,8 @@ a {
 /* dimensões */
 .size-info {
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-content: flex-start;
+  align-items: center;
   gap: 0.25rem;
   padding: 0.5rem 1rem;
   background: var(--color-gray-primary-10);
@@ -278,6 +277,8 @@ a {
   background: var(--color-background-content-box);
   color: var(--color-gray-primary-80);
   min-height: 32px;
+  flex: 1;
+  text-transform: capitalize;
 }
 .special-skill img {
   width: 1.5rem;
@@ -285,15 +286,6 @@ a {
 .special-skill .scale {
   display: flex;
   gap: 0.5rem;
-}
-.special-skill .force-scale,
-.special-skill .force-scale-disabled {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 999px;
-}
-.special-skill .force-scale-disabled {
-  opacity: 0.1;
 }
 
 /* barra de habilidades popup */
@@ -496,6 +488,21 @@ input[type="search"]::-webkit-search-cancel-button {
   padding: 1% 10% 5% 10%;
   box-sizing: border-box;
   align-items: center;
+}
+
+/* overlay */
+.bg--bottom-sheet-overlay[data-status="active"] {
+  background: var(--color-gray-primary-80);
+  backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(0.25rem);
+  z-index: 4;
+  width: 100dvw;
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+}
+.bg--bottom-sheet-overlay[data-status="inactive"] {
+  display: none;
 }
 
 /* footer */

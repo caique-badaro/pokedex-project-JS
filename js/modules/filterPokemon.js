@@ -1,14 +1,19 @@
 import { pokeapi } from "./pokeapi.js";
 import { createCard } from "./createCard.js";
 
-let allPokemons = await pokeapi(0, 151);
+let allPokemons = await loadingAll();
+
+export async function loadingAll() {
+  let loading = await pokeapi(0, 151);
+  return loading;
+}
 
 const cardsList = document.getElementById("grid-cards");
 const carouselTags = document.getElementById("classTag");
 const feedbackText = document.getElementById("search-resuls-filter");
 let arrTags = [];
 
-function listTags(allPokemons) {
+export function listTags(allPokemons) {
   allPokemons.forEach((el) => {
     let temp = [];
     el.types.forEach((el) => temp.push(el));
@@ -23,7 +28,7 @@ function listTags(allPokemons) {
 }
 listTags(allPokemons);
 
-function createTags(tags) {
+export function createTags(tags) {
   tags.forEach((tag) => {
     const tagStructure = document.createElement("div");
     tagStructure.innerHTML = `
@@ -37,12 +42,15 @@ function createTags(tags) {
   });
 }
 
-const tagList = await document.querySelectorAll(".tag-class");
+const tagList = document.querySelectorAll(".tag-class");
 
-function filterTag(elements) {
+export function filterTag(elements) {
   elements.forEach((el) => {
     el.addEventListener("click", (e) => {
-      let filter = e.target.innerText || e.target.title;
+      const tag = e.target.closest(".tag-class");
+      if (!tag) return;
+
+      let filter = tag.innerText || tag.title;
 
       // feedback visual tags
       tagList.forEach((el) => {
@@ -64,14 +72,15 @@ function filterTag(elements) {
         feedbackText.innerHTML = `
           <p class="body-larger">Você filtrou por
           <span class="text-bold">${filter}</span></p>
-          <p class="body-small"><span>${tagFilterApplied.length}</span> resultados</p>
+          <p class="body-small">Foram localizados <span>${tagFilterApplied.length}</span> pokémons</p>
         `;
       } else if (filter === "Todos") {
+        cardsList.innerHTML = "";
         createCard(allPokemons);
         feedbackText.innerHTML = `
           <p class="body-larger">Você filtrou por
           <span class="text-bold">${filter}</span></p>
-          <p class="body-small"><span>${allPokemons.length}</span> resultados</p>
+          <p class="body-small">Foram localizados <span>${allPokemons.length}</span> pokémons</p>
         `;
       } else {
         feedbackText.innerHTML = `
