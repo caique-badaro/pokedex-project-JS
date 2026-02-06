@@ -64,6 +64,7 @@
   width: fit-content;
   border-radius: 999px;
   cursor: pointer;
+  box-shadow: var(--shadow-card);
 }
 .tag-class .icon-class-pk {
   width: 1.25rem;
