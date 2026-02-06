@@ -42,7 +42,11 @@
           title="Pesquisar" />
       </div>
       <div class="links">
-        <a href="#" class="link-desktop" data-status="active">
+        <a
+          href="#"
+          id="surprise-header-desktop"
+          class="link-desktop"
+          data-status="active">
           <div class="container">
             <img src="icons/gray_shuffle.svg" alt="Surpreenda-me" />
             <p class="body-larger">Surpreenda-me</p>
@@ -64,7 +68,11 @@
     </div>
     <!-- navbar mobile -->
     <div class="nav-bar--bottom">
-      <a class="link-mobile" data-status="default" href="#">
+      <a
+        id="surprise-header-mobile"
+        class="link-mobile"
+        data-status="default"
+        href="#">
         <div class="icon-container">
           <img src="icons/gray_shuffle.svg" alt="Surpreenda-me" />
         </div>
@@ -110,12 +118,14 @@
       <!-- card pokemon -->
     </div>
 
+    <!-- teste lottie -->
+
     <!-- modal desktop and mobile -->
     <div
       id="modal-pokemon-details"
       class="bottom-sheet--card-pokemon"
-      data-status="active">
-      <div id="popup-bg-color" class="card--image-content">
+      data-status="inactive">
+      <div id="popup-bg-color" class="card--image-content grass">
         <div class="card-header">
           <div id="popup-pokemon-id" class="tag-id">
             <p class="body-larger text-bold">#999</p>
@@ -127,7 +137,7 @@
                 alt="Favoritar"
                 title="Favoritar" />
             </button>
-            <button class="btn-close">
+            <button id="modal-btn-close" class="btn-close">
               <img src="icons/white_close.svg" alt="Fechar" title="Fechar" />
             </button>
           </div>
@@ -136,21 +146,21 @@
           <div class="name-type">
             <div class="pokemon-name"><h2 class="h2">Bulbasaur</h2></div>
             <div class="pokemon-class">
-              <div class="tag-class fire">
+              <div class="tag-class grass">
                 <img
                   class="icon-class-pk"
-                  src="icons/white_water.svg"
+                  src="icons/white_grass.svg"
                   alt="Tipo de pokémon"
                   title="Tipo de pokémon" />
-                <p class="body-larger text-bold">Fire</p>
+                <p class="body-larger text-bold">grass</p>
               </div>
-              <div class="tag-class fire">
+              <div class="tag-class poison">
                 <img
                   class="icon-class-pk"
-                  src="icons/white_fire.svg"
+                  src="icons/white_poison.svg"
                   alt="Tipo de pokémon"
                   title="Tipo de pokémon" />
-                <p class="body-larger text-bold">Fire</p>
+                <p class="body-larger text-bold">poison</p>
               </div>
             </div>
             <div class="pokemon-size">
@@ -165,7 +175,10 @@
             </div>
           </div>
           <div id="modal-pokemon-image" class="image-pokemon">
-            <img src="" alt="Pokémon name" title="Pokémon name" />
+            <img
+              src="imgs/image-pokemon.svg"
+              alt="Pokémon name"
+              title="Pokémon name" />
           </div>
         </div>
       </div>
@@ -177,79 +190,67 @@
             <!-- HP -->
             <div class="skill-modal">
               <div class="info">
-                <img
-                  src="icons/gray_vital_signs.svg"
-                  alt="${Object.keys(pokemon.skills[0])}" />
+                <img src="icons/gray_vital_signs.svg" alt="" />
                 <p class="body-larger adjust-text">HP</p>
                 <p class="body-larger">999</p>
               </div>
               <div class="power-bar">
-                <div style="width: 20%" class="value fire"></div>
+                <div style="width: 1%" class="value grass"></div>
               </div>
             </div>
             <!-- attack -->
             <div class="skill-modal">
               <div class="info">
-                <img
-                  src="icons/gray_swords.svg"
-                  alt="${Object.keys(pokemon.skills[0])}" />
+                <img src="icons/gray_swords.svg" alt="" />
                 <p class="body-larger adjust-text">Ataque</p>
                 <p class="body-larger">999</p>
               </div>
               <div class="power-bar">
-                <div style="width: 20%" class="value fire"></div>
+                <div style="width: 1%" class="value grass"></div>
               </div>
             </div>
             <!-- defense -->
             <div class="skill-modal">
               <div class="info">
-                <img
-                  src="icons/gray_shield.svg"
-                  alt="${Object.keys(pokemon.skills[0])}" />
+                <img src="icons/gray_shield.svg" alt="" />
                 <p class="body-larger adjust-text">Defesa</p>
                 <p class="body-larger">999</p>
               </div>
               <div class="power-bar">
-                <div style="width: 20%" class="value fire"></div>
+                <div style="width: 1%" class="value grass"></div>
               </div>
             </div>
             <!-- attack special -->
             <div class="skill-modal">
               <div class="info">
-                <img
-                  src="icons/gray_bomb.svg"
-                  alt="${Object.keys(pokemon.skills[0])}" />
+                <img src="icons/gray_bomb.svg" alt="" />
                 <p class="body-larger adjust-text">Ataq. especial</p>
                 <p class="body-larger">999</p>
               </div>
               <div class="power-bar">
-                <div style="width: 20%" class="value fire"></div>
+                <div style="width: 1%" class="value grass"></div>
               </div>
             </div>
             <!-- defense special -->
             <div class="skill-modal">
               <div class="info">
-                <img
-                  src="icons/gray_shield_lock.svg"
-                  alt="${Object.keys(pokemon.skills[0])}" />
+                <img src="icons/gray_shield_lock.svg" alt="" />
                 <p class="body-larger adjust-text">Def. especial</p>
                 <p class="body-larger">999</p>
               </div>
               <div class="power-bar">
-                <div style="width: 20%" class="value fire"></div>
+                <div style="width: 1%" class="value grass"></div>
               </div>
             </div>
             <!-- speed -->
             <div class="skill-modal">
               <div class="info">
-                <img
-                  src="icons/gray_sprint.svg"
-                  alt="${Object.keys(pokemon.skills[0])}" />
+                <img src="icons/gray_sprint.svg" alt="" />
                 <p class="body-larger adjust-text">Velocidade</p>
                 <p class="body-larger">999</p>
               </div>
               <div class="power-bar">
-                <div style="width: 20%" class="value fire"></div>
+                <div style="width: 1%" class="value grass"></div>
               </div>
             </div>
           </div>
@@ -260,45 +261,29 @@
           <h6 class="h6 text-regular">Habilidades:</h6>
           <div class="content-box">
             <div class="special-skill">
-              <p class="body-larger text-bold">hab. 1</p>
-              <img
-                src="icons/yellow_stars.svg"
-                alt="${pokemon.ability[0]}"
-                title="${pokemon.ability[0]}" />
+              <p class="body-larger text-bold"></p>
             </div>
             <div class="special-skill">
-              <p class="body-larger text-bold">hab. 2</p>
-              <img
-                src="icons/yellow_stars.svg"
-                alt="${pokemon.ability[1]}"
-                title="${pokemon.ability[1]}" />
+              <p class="body-larger text-bold"></p>
             </div>
           </div>
           <!-- animate pokemon -->
           <div class="animate-pokemon">
-            <img
-              class="img-gif"
-              src="imgs/gif/front.gif"
-              alt="${pokemon.name}"
-              title="${pokemon.name}" />
-            <img
-              class="img-gif"
-              src="imgs/gif/back.gif"
-              alt="${pokemon.name}"
-              title="${pokemon.name}" />
+            <img class="img-gif" src="imgs/gif/front.gif" alt="" title="" />
+            <img class="img-gif" src="imgs/gif/back.gif" alt="" title="" />
           </div>
           <!-- power -->
           <div class="content-box">
             <div class="special-skill">
               <p class="body-larger">Poder total</p>
-              <h6 class="h6 text-bold">999</h6>
+              <h6 class="h6 text-bold">318</h6>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- botão overlay gerar pokemon aleatório -->
-    <div class="controls--bottom-sheet" data-status="active">
+    <div class="controls--bottom-sheet" data-status="inactive">
       <a href="#" class="link-desktop overlay--btn">
         <div class="container">
           <img src="icons/gray_arrow_back.svg" alt="Anterior" />
@@ -318,7 +303,7 @@
         </div>
       </a>
     </div>
-    <div class="bg--bottom-sheet-overlay" data-status="active"></div>
+    <div class="bg--bottom-sheet-overlay" data-status="inactive"></div>
     <footer>
       <div class="content">
         <a

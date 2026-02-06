@@ -134,6 +134,16 @@
     #52525c 100%
   );
 
+  /* random btn */
+  --color-background-random-btn: linear-gradient(
+    140deg,
+    #d3d49a 0,
+    #ffffff 5%,
+    #f1f38b 10%,
+    #d6d6b9 50%,
+    #f7d67e 100%
+  );
+
   /* shadow */
   --shadow-card: 0px 2px 8px 1px rgba(26, 26, 26, 0.12);
 
@@ -246,9 +256,9 @@ a {
   height: 4px;
 }
 .power-bar .value {
-  width: 37%;
   height: 4px;
   border-radius: 999px;
+  transition: width 0.5s ease-in-out;
 }
 
 /* dimensões */

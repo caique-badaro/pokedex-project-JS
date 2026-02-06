@@ -9,6 +9,7 @@
   box-shadow: var(--shadow-card);
   overflow: hidden;
   border: 1px solid var(--color-gray-primary-10);
+  cursor: pointer;
 }
 .card-pokemon .card--image-id-fav {
   color: var(--color-white-primary);
@@ -77,9 +78,17 @@
 }
 
 /* bottom sheet pokemon */
-.bottom-sheet--card-pokemon[data-status="inactive"] {
-  display: none;
+@keyframes openModal {
+  from {
+    transform: translateY(10%);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+
 .bottom-sheet--card-pokemon[data-status="active"] {
   display: flex;
   flex-direction: column;
@@ -96,12 +105,13 @@
   z-index: 5;
   top: calc(((100dvh - 604px) / 2));
   margin: 0 calc((100vw - 680px) / 2);
+  animation: openModal 0.5s linear forwards;
+}
+.bottom-sheet--card-pokemon[data-status="inactive"] {
+  display: none;
 }
 
 /* controles bottom sheet */
-.controls--bottom-sheet[data-status="inactive"] {
-  display: none;
-}
 .controls--bottom-sheet[data-status="active"] {
   z-index: 6;
   display: flex;
@@ -112,6 +122,29 @@
   position: fixed;
   /* referencia: altura do bottom sheet */
   bottom: calc((100dvh - 604px) / 10);
+  animation: openModal 0.5s linear forwards;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#surprise-popup {
+  background: var(--color-background-random-btn);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+.controls--bottom-sheet[data-status="inactive"] {
+  display: none;
 }
 .overlay--btn {
   width: fit-content;
@@ -300,6 +333,17 @@
   }
 
   /* bottom sheet pokemon */
+  @keyframes openModal {
+    from {
+      transform: translateY(100%);
+      opacity: 0.8;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
   .bottom-sheet--card-pokemon {
     width: 100% !important;
     padding: 0 5% !important;
@@ -310,6 +354,7 @@
     max-height: 95dvh;
     margin: 0 !important;
     top: auto !important;
+    animation: openModal 0.5s linear forwards !important;
   }
   .controls--bottom-sheet[data-status="inactive"],
   .controls--bottom-sheet[data-status="active"] {
