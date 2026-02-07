@@ -1,4 +1,4 @@
-import { createCard } from "./createCard.js";
+import { cardsList, createCard } from "./createCard.js";
 import { allPokemons, feedbackText } from "./filterPokemon.js";
 
 console.log(allPokemons);
@@ -13,10 +13,30 @@ let timer;
 searchInput.addEventListener("input", (event) => {
   clearTimeout(timer);
 
+  function searchRender(result, terms) {
+    const feedback = terms.join(", ");
+    const pokemons = result;
+
+    if (pokemons.length === 0) {
+      feedbackText.innerHTML = `
+        <p class="body-larger">Ops, não localizamos pokémons para o termo: <span class="text-bold">${feedback}</span></p>
+        <p class="body-small">Tente novamente com outra palavra-chave</p>`;
+    } else {
+      feedbackText.innerHTML = `
+        <p class="body-larger">Você pesquisou por: <span class="text-bold">${feedback}</span></p>
+        <p class="body-small">Foram localizados <span>${pokemons.length}</span> pokémons</p>`;
+
+      // limpar cards
+      cardsList.innerHTML = "";
+      createCard(pokemons);
+    }
+  }
+
+  // construção do array com os resultados da busca por nome
   timer = setTimeout(() => {
     let busca = event.target.value;
 
-    let uniqueTerms = [
+    const uniqueTerms = [
       ...new Set(
         busca
           .toLowerCase()
@@ -29,12 +49,20 @@ searchInput.addEventListener("input", (event) => {
     // validação array vazio
     if (uniqueTerms.length === 0) return;
 
-    let feedbackTerms = uniqueTerms.join(" ");
+    const searchResults = allPokemons.filter((pokemon) => {
+      // dados de referência
+      const listName = pokemon.name.toLowerCase();
+      const id = pokemon.id.toString();
+      const types = pokemon.types;
 
-    feedbackText.innerHTML = `
-        <p class="body-larger">Você pesquisou por: <span class="text-bold">${feedbackTerms}</span></p>
-        <p class="body-small">Foram localizados <span>14</span> pokémons</p>`;
-
-    console.log(uniqueTerms, feedbackTerms);
+      return uniqueTerms.some((keyword) => {
+        return (
+          listName.startsWith(keyword) ||
+          id === keyword ||
+          types.some((t) => t.startsWith(keyword))
+        );
+      });
+    });
+    searchRender(searchResults, uniqueTerms);
   }, 2000);
 });
