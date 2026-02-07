@@ -136,11 +136,11 @@
 
   /* random btn */
   --color-background-random-btn: linear-gradient(
-    140deg,
-    #d3d49a 0,
+    120deg,
+    #edf04b 0,
     #ffffff 5%,
     #f1f38b 10%,
-    #d6d6b9 50%,
+    #ecbb52 50%,
     #f7d67e 100%
   );
 
@@ -347,51 +347,56 @@ a {
 
 /* barra de busca */
 .search-bar {
-  position: relative;
   display: flex;
-  gap: 0.25rem;
+  height: 40px;
+  gap: 0rem;
   align-items: center;
   color: var(--color-gray-primary-50);
+  border: 1px solid var(--color-gray-primary-5);
   border-radius: 999px;
   overflow: hidden;
   flex: 1;
 }
-.search-bar img {
-  width: 20px;
-  opacity: 0.5;
-  cursor: pointer;
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+#search-bar {
+  flex: 1;
+  width: 100%;
 }
-.search-bar img:hover {
-  opacity: 1;
+.search-bar img {
+  width: 1.25rem;
+  height: 100%;
+  cursor: pointer;
+  background: var(--color-yellow-primary);
+  padding: 0.25rem 0.75rem;
 }
 .search-bar #search-bar {
+  height: 100%;
   flex: 1;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   line-height: 90%;
-  border: 1px solid var(--color-gray-primary-5);
   background: var(--color-gray-primary-5);
-  border-radius: 999px;
+  border: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .search-bar #search-bar:active,
-.search-bar #search-bar:focus,
-.search-bar #search-bar:hover {
+.search-bar #search-bar:hover,
+.search-bar #search-bar:focus {
+  border: none;
+  outline: var(--color-yellow-primary);
+  color: var(--color-gray-primary-80);
+}
+.search-bar:active,
+.search-bar:focus,
+.search-bar:hover {
   border-color: var(--color-yellow-primary);
   outline: var(--color-yellow-primary);
   color: var(--color-gray-primary-80);
-  padding-right: 2rem;
 }
 .search-bar #search-bar:not(:hover) {
   color: var(--color-gray-primary);
-  padding-right: 2rem;
 }
-input[type="search"]::-webkit-search-cancel-button {
+#search-bar[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   cursor: pointer;
 }
@@ -512,6 +517,35 @@ input[type="search"]::-webkit-search-cancel-button {
   top: 0;
 }
 .bg--bottom-sheet-overlay[data-status="inactive"] {
+  display: none;
+}
+
+/* back to top */
+.btn-back-to-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  background: var(--color-yellow-primary);
+  border: 1px solid var(--color-yellow-primary-15);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  position: fixed;
+  bottom: 4%;
+  right: 4%;
+}
+.btn-back-to-top .arrow-to-top {
+  transform: rotate(-90deg);
+}
+.btn-back-to-top #back-to-top--animate-pokemon[data-status="active"] {
+  width: 96px;
+  margin-top: -80px;
+}
+.btn-back-to-top #back-to-top--animate-pokemon[data-status="inactive"] {
   display: none;
 }
 

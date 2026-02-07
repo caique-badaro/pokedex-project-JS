@@ -23,7 +23,7 @@
   <body>
     <!-- navbar header -->
     <div class="nav-bar--header">
-      <a href="/index.html">
+      <a href="#">
         <img
           class="logo-default"
           src="imgs/logo/logo-pokemon_default.webp"
@@ -31,12 +31,13 @@
       </a>
       <div class="search-bar">
         <input
+          id="search-bar"
           class="body-default"
           type="search"
           name="search"
-          id="search-bar"
-          placeholder="Buscar por nome ou número" />
+          placeholder="Buscar por nome ou número..." />
         <img
+          id="btn-search"
           src="icons/gray_search.svg"
           alt="Pesquisar por nome ou número"
           title="Pesquisar" />
@@ -118,7 +119,18 @@
       <!-- card pokemon -->
     </div>
 
-    <!-- teste lottie -->
+    <div class="btn-back-to-top">
+      <!-- <img
+        class="arrow-to-top"
+        src="icons/gray_arrow_forward.svg"
+        alt=""
+        srcset="" /> -->
+      <img
+        id="back-to-top--animate-pokemon"
+        data-status="active"
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
+        alt="" />
+    </div>
 
     <!-- modal desktop and mobile -->
     <div
