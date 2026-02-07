@@ -1,7 +1,8 @@
 import { pokeapi } from "./pokeapi.js";
 import { createCard } from "./createCard.js";
 
-let allPokemons = await loadingAll();
+// array global com todos os pokémons
+export const allPokemons = await loadingAll();
 
 export async function loadingAll() {
   let loading = await pokeapi(0, 151);
@@ -10,7 +11,7 @@ export async function loadingAll() {
 
 const cardsList = document.getElementById("grid-cards");
 const carouselTags = document.getElementById("classTag");
-const feedbackText = document.getElementById("search-resuls-filter");
+export const feedbackText = document.getElementById("search-resuls-filter");
 let arrTags = [];
 
 export function listTags(allPokemons) {

@@ -280,9 +280,11 @@
   height: 100%;
   border-radius: var(--radius-default);
   background: var(--color-background-content-box);
+  height: 64px;
 }
 .animate-pokemon .img-gif {
-  height: 4rem;
+  max-height: 4rem;
+  max-width: 5rem;
 }
 
 @media (min-width: 200px) and (max-width: 768px) {

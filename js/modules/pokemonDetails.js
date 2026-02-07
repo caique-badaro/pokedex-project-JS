@@ -1,8 +1,7 @@
 // (1) configuração para abrir e fechar o modal com todos os detalhes sobre o pokémon selecionado.
 // (2) configuração para ativar o botão "surpreenda-me"
-import { loadingAll } from "./filterPokemon.js";
+import { loadingAll, allPokemons } from "./filterPokemon.js";
 
-const allPokemons = await loadingAll();
 const popup = document.getElementById("modal-pokemon-details");
 
 // random pokemon btn
@@ -53,92 +52,99 @@ export function pokemonDetails(idPokemon) {
 function loadContent(pokemon) {
   let data = popupElements;
 
-  // id
-  data.id.innerText = `# ${pokemon.id}`;
+  try {
+    // id
+    data.id.innerText = `# ${pokemon.id}`;
 
-  // background modal
-  data.bgHeader.className = "";
-  data.bgHeader.classList.add("card--image-content", pokemon.types[0]);
+    // background modal
+    data.bgHeader.className = "";
+    data.bgHeader.classList.add("card--image-content", pokemon.types[0]);
 
-  // name
-  data.name.innerText = pokemon.name;
+    // name
+    data.name.innerText = pokemon.name;
 
-  // tag classe pokemon
-  data.tagClass.forEach((el, index) => {
-    const type = pokemon.types[index];
-    const child = el.children;
+    // tag classe pokemon
+    data.tagClass.forEach((el, index) => {
+      const type = pokemon.types[index];
+      const child = el.children;
 
-    if (pokemon.types.length === 2) {
-      el.className = "";
-      el.classList.add("tag-class", type);
-      child[0].src = `icons/white_${type}.svg`;
-      child[0].alt = type;
-      child[0].title = type;
-      child[1].innerText = type;
+      if (pokemon.types.length === 2) {
+        el.className = "";
+        el.classList.add("tag-class", type);
+        child[0].src = `icons/white_${type}.svg`;
+        child[0].alt = type;
+        child[0].title = type;
+        child[1].innerText = type;
 
-      data.tagClass[1].style = "display:flex";
-    } else if (pokemon.types.length === 1) {
-      data.tagClass[1].style = "display:none";
+        data.tagClass[1].style = "display:flex";
+      } else if (pokemon.types.length === 1) {
+        data.tagClass[1].style = "display:none";
 
-      el.className = "";
-      el.classList.add("tag-class", type);
-      child[0].src = type
-        ? `icons/white_${type}.svg`
-        : `icons/white_swords.svg`;
-      child[0].alt = type;
-      child[0].title = type;
-      child[1].innerText = type;
-      return;
+        el.className = "";
+        el.classList.add("tag-class", type);
+        child[0].src = type
+          ? `icons/white_${type}.svg`
+          : `icons/white_swords.svg`;
+        child[0].alt = type;
+        child[0].title = type;
+        child[1].innerText = type;
+        return;
+      }
+    });
+
+    // altura e peso
+    data.height.innerText = `${pokemon.height} m`;
+    data.weight.innerText = `${pokemon.weight} kg`;
+
+    // imagem
+    data.image.src = pokemon.img;
+    data.image.alt = pokemon.name;
+    data.image.title = pokemon.name;
+
+    // imagem gif
+    let animateImg =
+      data.specialSkills.children[2].querySelectorAll(".img-gif");
+    let img = [pokemon.gifFront, pokemon.gifBack];
+
+    for (let i = 0; i < animateImg.length; i++) {
+      animateImg[i].src = img[i];
+      animateImg[i].alt = pokemon.name;
+      animateImg[i].title = pokemon.name;
     }
-  });
 
-  // altura e peso
-  data.height.innerText = `${pokemon.height} m`;
-  data.weight.innerText = `${pokemon.weight} kg`;
+    // habilidades especiais
+    let skillName =
+      data.specialSkills.children[1].querySelectorAll(".text-bold");
 
-  // imagem
-  data.image.src = pokemon.img;
-  data.image.alt = pokemon.name;
-  data.image.title = pokemon.name;
+    skillName.forEach((skillSpecial, index) => {
+      skillSpecial.innerText = pokemon.ability[index];
+    });
 
-  // skills pokemon
-  pokemon.skills.forEach((skill, index) => {
-    let value = Object.values(skill)[0];
-    let name = Object.keys(skill)[0];
-    let key = name.replace(/-/gi, " ");
+    // skills pokemon
+    pokemon.skills.forEach((skill, index) => {
+      let value = Object.values(skill)[0];
+      let name = Object.keys(skill)[0];
+      let key = name.replace(/-/gi, " ");
 
-    let local = data.skills[index].children[0].children;
-    let powerBar = data.skills[index].children[1].children[0];
+      let local = data.skills[index].children[0].children;
+      let powerBar = data.skills[index].children[1].children[0];
 
-    // nome e valor da skill
-    local[0].alt = key;
-    local[0].title = key;
-    local[2].innerText = value;
-    // // barra de poder e valor total
-    powerBar.style = `width: ${(value / 160) * 100 + "%"}`;
-    powerBar.className = "";
-    powerBar.classList.add("value", pokemon.types[0]);
-  });
+      // nome e valor da skill
+      local[0].alt = key;
+      local[0].title = key;
+      local[2].innerText = value;
+      // // barra de poder e valor total
+      powerBar.style = `width: ${(value / 160) * 100 + "%"}`;
+      powerBar.className = "";
+      powerBar.classList.add("value", pokemon.types[0]);
+    });
 
-  // habilidades especiais e imagem gif
-  let skillName = data.specialSkills.children[1].querySelectorAll(".text-bold");
-  let animateImg = data.specialSkills.children[2].querySelectorAll(".img-gif");
-  let img = [pokemon.gifFront, pokemon.gifBack];
-
-  skillName.forEach((skillSpecial, index) => {
-    skillSpecial.innerText = pokemon.ability[index];
-  });
-
-  for (let i = 0; i < animateImg.length; i++) {
-    animateImg[i].src = img[i];
-    animateImg[i].alt = pokemon.name;
-    animateImg[i].title = pokemon.name;
+    // poder total
+    let power = data.specialSkills.children[3].querySelector(".h6");
+    power.innerText = pokemon.power;
+  } catch (error) {
+    console.error("Falha no carregamento dos dados", error);
   }
-
-  // poder total
-  let power = data.specialSkills.children[3].querySelector(".h6");
-
-  power.innerText = pokemon.power;
 }
 
 // random pokémon
