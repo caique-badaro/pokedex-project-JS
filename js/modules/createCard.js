@@ -1,4 +1,4 @@
-const cardsList = document.getElementById("grid-cards");
+export const cardsList = document.getElementById("grid-cards");
 
 export async function createCard(pokemonsInfo) {
   // percorrer array para gerar cards
