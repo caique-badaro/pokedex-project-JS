@@ -1,0 +1,42 @@
+/* telas de suporte para orientar a navegação */
+#empty-search {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  flex: 1;
+}
+#empty-search .img-pokeballs {
+  width: 30%;
+  padding: 1rem 0 0 0;
+}
+#empty-search .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-gray-primary-80);
+}
+#empty-search .content .body-larger {
+  color: var(--color-gray-primary-50);
+}
+
+/* mobile */
+@media (min-width: 200px) and (max-width: 768px) {
+  #empty-search {
+    gap: 2rem;
+  }
+  #empty-search .img-pokeballs {
+    width: 60%;
+    padding: 20% 0 0 0;
+  }
+  #empty-search .content {
+    padding: 0% 5%;
+  }
+  #empty-search .content .h6 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+}

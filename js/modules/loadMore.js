@@ -1,4 +1,4 @@
-import { createCard } from "./createCard.js";
+import { cardsList, createCard } from "./createCard.js";
 import { pokeapi } from "./pokeapi.js";
 
 // controle para definir o final da lista de pokémons
@@ -8,13 +8,50 @@ const LIMIT = 20;
 export async function loadMore() {
   if (offset < 140) {
     const pokemons = await pokeapi(offset, LIMIT);
-    createCard(pokemons);
     offset += LIMIT;
+    createCard(pokemons);
+    autoLoading();
   } else if (offset + LIMIT > 151 && offset === 140) {
     const pokemons = await pokeapi(offset, 11);
-    createCard(pokemons);
     offset = 151;
+    createCard(pokemons);
   } else {
-    console.log(offset);
   }
 }
+
+// controle do evento de observação
+let observer = null;
+
+export function stopAutoLoading() {
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
+}
+
+function autoLoading() {
+  const anchor = document.querySelector("footer");
+
+  if (!anchor) return;
+  stopAutoLoading();
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && offset < 151) {
+          loadMore();
+          console.log(offset);
+        } else if (offset === 151) {
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.01 },
+  );
+  observer.observe(anchor);
+}
+
+document.getElementById("logo-home").addEventListener("click", () => {
+  cardsList.innerHTML = "";
+  offset = 0;
+});

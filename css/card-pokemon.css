@@ -137,6 +137,7 @@
   }
 }
 
+#surprise-empty-search,
 #surprise-popup {
   background: var(--color-background-random-btn);
   background-size: 400% 400%;

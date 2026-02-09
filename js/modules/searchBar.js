@@ -1,41 +1,56 @@
 import { cardsList, createCard } from "./createCard.js";
 import { allPokemons, feedbackText } from "./filterPokemon.js";
-
-console.log(allPokemons);
+import { stopAutoLoading } from "./loadMore.js";
 
 const searchInput = document.getElementById("search-bar");
 const searchbtn = document.getElementById("btn-search");
-
-console.log(searchInput);
 
 let timer;
 
 searchInput.addEventListener("input", (event) => {
   clearTimeout(timer);
+  let busca = event.target.value;
 
   function searchRender(result, terms) {
     const feedback = terms.join(", ");
     const pokemons = result;
 
+    stopAutoLoading();
+
     if (pokemons.length === 0) {
-      feedbackText.innerHTML = `
-        <p class="body-larger">Ops, não localizamos pokémons para o termo: <span class="text-bold">${feedback}</span></p>
-        <p class="body-small">Tente novamente com outra palavra-chave</p>`;
+      // limpar resultado
+      cardsList.innerHTML = "";
+      feedbackText.innerHTML = "";
+
+      // importar trecho html busca vazia
+      fetch("../../partials/empty-search.html")
+        .then((r) => r.text())
+        .then((template) => {
+          document.getElementById("empty-search").innerHTML = template;
+          document.querySelector("#empty-search .content .h6 span").innerText =
+            feedback;
+        });
+      document.getElementById("search-bar").value = "";
+      // ajuste na estilização da tag todos
+      document.getElementById("classTag").children[0].dataset.filterClass =
+        "inactive";
     } else {
       feedbackText.innerHTML = `
         <p class="body-larger">Você pesquisou por: <span class="text-bold">${feedback}</span></p>
-        <p class="body-small">Foram localizados <span>${pokemons.length}</span> pokémons</p>`;
+        <p class="body-small">${pokemons.length > 1 ? `Foram localizados ` : `Foi localizado `}<span>${pokemons.length}</span>${pokemons.length > 1 ? ` pokémons` : ` pokémon`}</p>`;
 
       // limpar cards
       cardsList.innerHTML = "";
+      document.getElementById("search-bar").value = "";
       createCard(pokemons);
+      // ajuste na estilização da tag todos
+      document.getElementById("classTag").children[0].dataset.filterClass =
+        "inactive";
     }
   }
 
   // construção do array com os resultados da busca por nome
   timer = setTimeout(() => {
-    let busca = event.target.value;
-
     const uniqueTerms = [
       ...new Set(
         busca
@@ -57,7 +72,7 @@ searchInput.addEventListener("input", (event) => {
 
       return uniqueTerms.some((keyword) => {
         return (
-          listName.startsWith(keyword) ||
+          listName.includes(keyword) ||
           id === keyword ||
           types.some((t) => t.startsWith(keyword))
         );

@@ -44,6 +44,7 @@ export function createTags(tags) {
 }
 
 const tagList = document.querySelectorAll(".tag-class");
+const emptySearch = document.getElementById("empty-search");
 
 export function filterTag(elements) {
   elements.forEach((el) => {
@@ -68,6 +69,7 @@ export function filterTag(elements) {
       );
 
       if (tagFilterApplied.length > 0) {
+        emptySearch.innerHTML = "";
         cardsList.innerHTML = "";
         createCard(tagFilterApplied);
         feedbackText.innerHTML = `
@@ -76,6 +78,7 @@ export function filterTag(elements) {
           <p class="body-small">Foram localizados <span>${tagFilterApplied.length}</span> pokémons</p>
         `;
       } else if (filter === "Todos") {
+        emptySearch.innerHTML = "";
         cardsList.innerHTML = "";
         createCard(allPokemons);
         feedbackText.innerHTML = `
@@ -84,6 +87,7 @@ export function filterTag(elements) {
           <p class="body-small">Foram localizados <span>${allPokemons.length}</span> pokémons</p>
         `;
       } else {
+        emptySearch.innerHTML = "";
         feedbackText.innerHTML = `
           <p class="body-larger">Não localizamos nenhum pokémon para o filtro</p>
         `;
