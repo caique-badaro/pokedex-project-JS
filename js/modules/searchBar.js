@@ -23,7 +23,7 @@ searchInput.addEventListener("input", (event) => {
       feedbackText.innerHTML = "";
 
       // importar trecho html busca vazia
-      fetch("../../partials/empty-search.html")
+      fetch("./partials/empty-search.html")
         .then((r) => r.text())
         .then((template) => {
           document.getElementById("empty-search").innerHTML = template;
