@@ -14,7 +14,7 @@ export async function createCard(pokemonsInfo) {
               <p class="body-larger text-bold">#${pokemon.id}</p>
             </div>
             <button class="btn-favorite">
-              <img src="icons/white_favorite.svg" alt="Favoritar" />
+              <img class="favorite" src="icons/white_favorite.svg" alt="Favoritar" />
             </button>
           </div>
           <div class="pokemon-image">

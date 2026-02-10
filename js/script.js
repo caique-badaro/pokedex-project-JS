@@ -3,6 +3,8 @@ import { loadMore } from "./modules/loadMore.js";
 import { filterTag, createTags, listTags } from "./modules/filterPokemon.js";
 import { pokemonDetails } from "./modules/pokemonDetails.js";
 import {} from "./modules/searchBar.js";
+import { favoritePokemon } from "./modules/favoritePokemon.js";
 
 pokeapi();
 await loadMore();
+favoritePokemon();
