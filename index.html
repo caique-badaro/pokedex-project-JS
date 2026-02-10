@@ -24,7 +24,7 @@
   <body>
     <!-- navbar header -->
     <div class="nav-bar--header">
-      <a href="/index.html" id="logo-home">
+      <a href="/" id="logo-home">
         <img
           class="logo-default"
           src="imgs/logo/logo-pokemon_default.webp"
@@ -48,19 +48,22 @@
           href="#"
           id="surprise-header-desktop"
           class="link-desktop"
-          data-status="active">
+          data-status="inactive">
           <div class="container">
             <img src="icons/gray_shuffle.svg" alt="Surpreenda-me" />
             <p class="body-larger">Surpreenda-me</p>
           </div>
         </a>
-        <a href="#" class="link-desktop">
+        <a href="#" class="link-desktop" data-status="inactive">
           <div class="container">
             <img src="icons/gray_favorite.svg" alt="Favoritos" />
+            <p data-status="inactive" id="favorites-counter" class="body-small">
+              0
+            </p>
             <p class="body-larger">Favoritos</p>
           </div>
         </a>
-        <a href="#" class="link-desktop">
+        <a href="#" class="link-desktop" data-status="inactive">
           <div class="container">
             <img src="icons/gray_filter_alt.svg" alt="Filtrar" />
             <p class="body-larger">Filtrar</p>
@@ -80,10 +83,13 @@
         </div>
         <p class="body-label-default">Surpreenda-me</p>
       </a>
-      <a class="link-mobile" data-status="active" href="#">
+      <a class="link-mobile" data-status="default" href="#">
         <div class="icon-container">
           <img src="icons/gray_favorite.svg" alt="Favoritos" />
         </div>
+        <p id="favorites-counter" data-status="inactive" class="body-small">
+          999
+        </p>
         <p class="body-label-default">Favoritos</p>
       </a>
       <a class="link-mobile" data-status="default" href="#">
@@ -319,6 +325,16 @@
       </a>
     </div>
     <div class="bg--bottom-sheet-overlay" data-status="inactive"></div>
+    <!-- animate loading -->
+    <div id="loading-animation">
+      <img
+        class="animate-pokeball"
+        src="imgs/pokeball_vector.svg"
+        alt="Carregando, aguarde um instante"
+        title="Carregando pokémons" />
+      <p class="body-default">Carregando pokémons...</p>
+    </div>
+    <!-- footer -->
     <footer>
       <div class="content">
         <a

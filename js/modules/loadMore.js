@@ -30,7 +30,7 @@ export function stopAutoLoading() {
 }
 
 function autoLoading() {
-  const anchor = document.querySelector("footer");
+  const anchor = document.querySelector("#loading-animation");
 
   if (!anchor) return;
   stopAutoLoading();
@@ -40,13 +40,13 @@ function autoLoading() {
       entries.forEach((entry) => {
         if (entry.isIntersecting && offset < 151) {
           loadMore();
-          console.log(offset);
         } else if (offset === 151) {
           observer.disconnect();
+          anchor.innerHTML = "";
         }
       });
     },
-    { threshold: 0.01 },
+    { threshold: 0.8 },
   );
   observer.observe(anchor);
 }

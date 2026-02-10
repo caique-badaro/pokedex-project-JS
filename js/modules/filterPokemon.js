@@ -1,5 +1,6 @@
 import { pokeapi } from "./pokeapi.js";
 import { createCard } from "./createCard.js";
+import { stopAutoLoading } from "./loadMore.js";
 
 // array global com todos os pokémons
 export const allPokemons = await loadingAll();
@@ -49,6 +50,10 @@ const emptySearch = document.getElementById("empty-search");
 export function filterTag(elements) {
   elements.forEach((el) => {
     el.addEventListener("click", (e) => {
+      // parar evento de loading infinito
+      stopAutoLoading();
+      document.querySelector("#loading-animation").innerHTML = "";
+
       const tag = e.target.closest(".tag-class");
       if (!tag) return;
 

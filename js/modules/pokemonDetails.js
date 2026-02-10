@@ -185,6 +185,9 @@ closeModal.forEach((el) => {
 
 // abrir detalhes do card
 document.addEventListener("click", (e) => {
+  // valida se o clique foi em favoritar (card)
+  if (e.target.classList.value === "favorite") return;
+
   const click = e.target.closest(".card-pokemon");
   if (!click) return;
 

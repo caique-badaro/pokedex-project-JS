@@ -16,6 +16,7 @@ searchInput.addEventListener("input", (event) => {
     const pokemons = result;
 
     stopAutoLoading();
+    document.querySelector("#loading-animation").innerHTML = "";
 
     if (pokemons.length === 0) {
       // limpar resultado

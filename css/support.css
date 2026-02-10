@@ -22,6 +22,40 @@
 #empty-search .content .body-larger {
   color: var(--color-gray-primary-50);
 }
+@keyframes spinPokeball {
+  0% {
+    transform: rotate(0deg);
+    padding: 0 0 0 0;
+  }
+  25% {
+    transform: rotate(120deg);
+    padding: 0 4px 0 0;
+  }
+  50% {
+    transform: rotate(240deg);
+    padding: 0 0 0 0;
+  }
+  100% {
+    transform: rotate(360deg);
+    padding: 0 0 0 0;
+  }
+}
+
+/* animação pokébola - loading */
+#loading-animation {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 5rem 0;
+  box-sizing: border-box;
+  color: var(--color-gray-primary-50);
+}
+#loading-animation .animate-pokeball {
+  width: clamp(56px, 56px, 96px);
+  animation: spinPokeball 1s linear infinite;
+}
 
 /* mobile */
 @media (min-width: 200px) and (max-width: 768px) {
