@@ -1,7 +1,7 @@
 import { pokemonDetails } from "./pokemonDetails.js";
 
+localStorage.setItem("idsFavoritos", JSON.stringify([]));
 // ids e quantidade de favoritos
-localStorage.setItem("idsFavoritos", "");
 let favoritesList = [];
 var favCount = 0;
 // tag contador nos botões desk e mobile
