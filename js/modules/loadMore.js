@@ -1,5 +1,6 @@
 import { cardsList, createCard } from "./createCard.js";
 import { pokeapi } from "./pokeapi.js";
+import { loadingLocalData } from "./favoritePokemon.js";
 
 // controle para definir o final da lista de pokémons
 let offset = 0;
@@ -10,11 +11,13 @@ export async function loadMore() {
     const pokemons = await pokeapi(offset, LIMIT);
     offset += LIMIT;
     createCard(pokemons);
+    loadingLocalData();
     autoLoading();
   } else if (offset + LIMIT > 151 && offset === 140) {
     const pokemons = await pokeapi(offset, 11);
     offset = 151;
     createCard(pokemons);
+    loadingLocalData();
   } else {
   }
 }

@@ -54,6 +54,7 @@
 /* class filter */
 .filter-class {
   display: flex;
+  gap: 1rem;
 }
 /* ---- tag classe */
 .tag-class {
@@ -78,6 +79,9 @@
 
 @media (min-width: 200px) and (max-width: 768px) {
   /* ---- tag classe */
+  .filter-class {
+    gap: 0.75rem;
+  }
   .tag-class .body-larger {
     display: none;
   }
