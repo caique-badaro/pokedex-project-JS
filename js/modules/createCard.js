@@ -1,3 +1,5 @@
+import { favoritePokemon } from "./favoritePokemon.js";
+
 export const cardsList = document.getElementById("grid-cards");
 
 export async function createCard(pokemonsInfo) {
@@ -85,4 +87,9 @@ export async function createCard(pokemonsInfo) {
     // adiciona o card dentro do grid
     cardsList.appendChild(card);
   });
+
+  // mapeamento dos cards criados para identificar os pokémons favoritados
+  let mapCards = document.querySelectorAll(".card-pokemon .btn-favorite");
+  let mapIds = document.querySelectorAll(".card-pokemon .tag-id p");
+  favoritePokemon(mapCards, mapIds);
 }

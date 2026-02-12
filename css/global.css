@@ -30,105 +30,123 @@
     #faf5ff 100%
   );
 
+  /* background pokemons raros */
+  --color-background-rare: conic-gradient(
+    from 45deg,
+    #a5c8e4 0deg,
+    #e4ad47 30deg,
+    #e590dc 60deg,
+    #a67451 90deg,
+    #655cd0 120deg,
+    #604b5e 150deg,
+    #9c44c2 180deg,
+    #df466d 210deg,
+    #e852b2 240deg,
+    #af667e 270deg,
+    #6a80a1 300deg,
+    #5d9d90 330deg,
+    #93b98f 360deg
+  );
+
   /* backgroound class pokemon */
   --color-pokemon-background-fire: linear-gradient(
-    90deg,
+    315deg,
     #ff8904 0,
     #fb2c36 50%,
     #f6339a 100%
   );
   --color-pokemon-background-water: linear-gradient(
-    90deg,
+    315deg,
     #51a2ff 0,
     #00b8db 50%,
     #00bba7 100%
   );
   --color-pokemon-background-grass: linear-gradient(
-    90deg,
+    315deg,
     #05df72 0,
     #00bc7d 50%,
     #009689 100%
   );
   --color-pokemon-background-electric: linear-gradient(
-    90deg,
+    315deg,
     #ffdf20 0,
     #f0b100 50%,
     #ff6900 100%
   );
   --color-pokemon-background-psychic: linear-gradient(
-    90deg,
+    315deg,
     #fb64b6 0,
     #ad46ff 50%,
     #4f39f6 100%
   );
   --color-pokemon-background-ice: linear-gradient(
-    90deg,
+    315deg,
     #53eafd 0,
     #51a2ff 50%,
     #615fff 100%
   );
   --color-pokemon-background-dragon: linear-gradient(
-    90deg,
+    315deg,
     #615fff 0,
     #9810fa 50%,
     #e60076 100%
   );
   --color-pokemon-background-ghost: linear-gradient(
-    90deg,
+    315deg,
     #9810fa 0,
     #432dd7 50%,
     #5d0ec0 100%
   );
   --color-pokemon-background-fairy: linear-gradient(
-    90deg,
+    315deg,
     #fda5d5 0,
     #fb64b6 50%,
     #ff2056 100%
   );
   --color-pokemon-background-normal: linear-gradient(
-    90deg,
+    315deg,
     #99a1af 0,
     #6a7282 50%,
     #4a5565 100%
   );
   --color-pokemon-background-fighting: linear-gradient(
-    90deg,
+    315deg,
     #e7000b 0,
     #ca3500 50%,
     #973c00 100%
   );
   --color-pokemon-background-flying: linear-gradient(
-    90deg,
+    315deg,
     #a3b3ff 0,
     #51a2ff 50%,
     #00b8db 100%
   );
   --color-pokemon-background-poison: linear-gradient(
-    90deg,
+    315deg,
     #ad46ff 0,
     #c800de 50%,
     #e60076 100%
   );
   --color-pokemon-background-ground: linear-gradient(
-    90deg,
+    315deg,
     #d08700 0,
     #bb4d00 50%,
     #9f2d00 100%
   );
   --color-pokemon-background-rock: linear-gradient(
-    90deg,
+    315deg,
     #a65f00 0,
     #57534d 50%,
     #364153 100%
   );
   --color-pokemon-background-bug: linear-gradient(
-    90deg,
+    315deg,
     #7ccf00 0,
     #00a63e 50%,
     #007a55 100%
   );
   --color-pokemon-background-steel: linear-gradient(
-    90deg,
+    315deg,
     #99a1af 0,
     #62748e 50%,
     #52525c 100%
@@ -419,7 +437,7 @@ a {
 }
 
 /* contador de favoritos */
-#favorites-counter {
+.favorites-counter {
   color: var(--color-white-primary);
   border-radius: 999px;
   background: var(--color-background-red-favorited);
@@ -429,7 +447,7 @@ a {
   top: -5px;
   left: calc(-2%);
 }
-#favorites-counter[data-status="inactive"] {
+.favorites-counter[data-status="inactive"] {
   display: none;
 }
 
@@ -691,7 +709,7 @@ footer .body-default {
     color: var(--color-gray-primary-80);
   }
   /* contador de favoritos */
-  #favorites-counter {
+  .favorites-counter {
     top: 2px;
     left: calc((100dvw / 2) * 1.005);
   }
@@ -719,7 +737,7 @@ footer .body-default {
   .carousel-class .tag-class:first-child {
     margin-left: 5%;
   }
-  .carousel-class .tag-class:last-child {
+  .carousel-class div:last-child {
     margin-right: 5%;
   }
   .carousel-class .arrow-carousel {

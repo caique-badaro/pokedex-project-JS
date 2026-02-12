@@ -1,10 +1,12 @@
 import { pokeapi } from "./pokeapi.js";
 import { createCard } from "./createCard.js";
 import { stopAutoLoading } from "./loadMore.js";
+import { favoritePokemon, loadingLocalData } from "./favoritePokemon.js";
 
 // array global com todos os pokémons
 export const allPokemons = await loadingAll();
 
+// todos os pokémons
 export async function loadingAll() {
   let loading = await pokeapi(0, 151);
   return loading;
@@ -74,28 +76,39 @@ export function filterTag(elements) {
       );
 
       if (tagFilterApplied.length > 0) {
+        // ajuste de ui
         emptySearch.innerHTML = "";
         cardsList.innerHTML = "";
+        // criação dos cards
         createCard(tagFilterApplied);
         feedbackText.innerHTML = `
           <p class="body-larger">Você filtrou por
           <span class="text-bold">${filter}</span></p>
           <p class="body-small">Foram localizados <span>${tagFilterApplied.length}</span> pokémons</p>
         `;
+        // identificar favoritos
+        loadingLocalData();
       } else if (filter === "Todos") {
+        // ajuste de ui
         emptySearch.innerHTML = "";
         cardsList.innerHTML = "";
+        // criação dos cards
         createCard(allPokemons);
         feedbackText.innerHTML = `
           <p class="body-larger">Você filtrou por
           <span class="text-bold">${filter}</span></p>
           <p class="body-small">Foram localizados <span>${allPokemons.length}</span> pokémons</p>
         `;
+        // identificar favoritos
+        loadingLocalData();
       } else {
+        // ajuste de ui
         emptySearch.innerHTML = "";
         feedbackText.innerHTML = `
           <p class="body-larger">Não localizamos nenhum pokémon para o filtro</p>
         `;
+        // identificar favoritos
+        loadingLocalData();
       }
     });
   });

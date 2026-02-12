@@ -1,6 +1,7 @@
 import { cardsList, createCard } from "./createCard.js";
 import { allPokemons, feedbackText } from "./filterPokemon.js";
 import { stopAutoLoading } from "./loadMore.js";
+import { loadingLocalData } from "./favoritePokemon.js";
 
 const searchInput = document.getElementById("search-bar");
 const searchbtn = document.getElementById("btn-search");
@@ -17,6 +18,7 @@ searchInput.addEventListener("input", (event) => {
 
     stopAutoLoading();
     document.querySelector("#loading-animation").innerHTML = "";
+    const tagList = document.querySelectorAll(".tag-class");
 
     if (pokemons.length === 0) {
       // limpar resultado
@@ -33,8 +35,8 @@ searchInput.addEventListener("input", (event) => {
         });
       document.getElementById("search-bar").value = "";
       // ajuste na estilização da tag todos
-      document.getElementById("classTag").children[0].dataset.filterClass =
-        "inactive";
+      tagList.forEach((tag) => (tag.dataset.filterClass = "inactive"));
+      loadingLocalData();
     } else {
       feedbackText.innerHTML = `
         <p class="body-larger">Você pesquisou por: <span class="text-bold">${feedback}</span></p>
@@ -44,9 +46,9 @@ searchInput.addEventListener("input", (event) => {
       cardsList.innerHTML = "";
       document.getElementById("search-bar").value = "";
       createCard(pokemons);
-      // ajuste na estilização da tag todos
-      document.getElementById("classTag").children[0].dataset.filterClass =
-        "inactive";
+      // ajuste na estilização de todas as tags
+      tagList.forEach((tag) => (tag.dataset.filterClass = "inactive"));
+      loadingLocalData();
     }
   }
 
