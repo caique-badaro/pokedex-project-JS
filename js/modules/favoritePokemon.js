@@ -1,5 +1,6 @@
 import { pokemonDetails } from "./pokemonDetails.js";
 
+localStorage.setItem("idsFavoritos", JSON.stringify([]));
 // ids e quantidade de favoritos
 let favoritesList = [];
 var favCount = 0;
