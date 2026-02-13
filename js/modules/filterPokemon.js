@@ -110,6 +110,7 @@ export function filterTag(elements) {
         // identificar favoritos
         loadingLocalData();
       }
+      window.scrollTo(0, 0);
     });
   });
 }

@@ -1,4 +1,5 @@
 import { favoritePokemon } from "./favoritePokemon.js";
+import { sortCards } from "./sortingFilters.js";
 
 export const cardsList = document.getElementById("grid-cards");
 
@@ -7,6 +8,7 @@ export async function createCard(pokemonsInfo) {
   pokemonsInfo.forEach((pokemon) => {
     const card = document.createElement("div");
     card.classList.add("card-pokemon");
+    card.dataset.id = pokemon.id;
 
     // conteúdo card
     card.innerHTML = `
@@ -89,7 +91,9 @@ export async function createCard(pokemonsInfo) {
   });
 
   // mapeamento dos cards criados para identificar os pokémons favoritados
+  let cards = document.querySelectorAll(".card-pokemon");
   let mapCards = document.querySelectorAll(".card-pokemon .btn-favorite");
   let mapIds = document.querySelectorAll(".card-pokemon .tag-id p");
   favoritePokemon(mapCards, mapIds);
+  sortCards(cards);
 }

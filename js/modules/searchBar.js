@@ -2,6 +2,7 @@ import { cardsList, createCard } from "./createCard.js";
 import { allPokemons, feedbackText } from "./filterPokemon.js";
 import { stopAutoLoading } from "./loadMore.js";
 import { loadingLocalData } from "./favoritePokemon.js";
+import { pokemonDetails } from "./pokemonDetails.js";
 
 const searchInput = document.getElementById("search-bar");
 const searchbtn = document.getElementById("btn-search");
@@ -32,6 +33,18 @@ searchInput.addEventListener("input", (event) => {
           document.getElementById("empty-search").innerHTML = template;
           document.querySelector("#empty-search .content .h6 span").innerText =
             feedback;
+
+          let surprise = document.getElementById("surprise-empty-search");
+
+          surprise.addEventListener("click", (event) => {
+            if (event.target.closest("surprise-empty-search")) return;
+            event.preventDefault();
+            let max = allPokemons.length;
+            let min = 1;
+            let randomId = Math.floor(Math.random() * (max - min + 1) + min);
+
+            pokemonDetails(randomId);
+          });
         });
       document.getElementById("search-bar").value = "";
       // ajuste na estilização da tag todos

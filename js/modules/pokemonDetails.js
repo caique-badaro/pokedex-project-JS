@@ -44,7 +44,6 @@ export function pokemonDetails(idPokemon) {
   popupElements.controls.forEach((el) => {
     el.dataset.status = "inactive" ? "active" : "";
   });
-
   loadContent(pokemon);
 }
 
