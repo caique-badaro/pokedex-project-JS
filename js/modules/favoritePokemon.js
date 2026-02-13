@@ -1,99 +1,195 @@
 import { pokemonDetails } from "./pokemonDetails.js";
+import { allPokemons, feedbackText } from "./filterPokemon.js";
+import { cardsList, createCard } from "./createCard.js";
+import { stopAutoLoading } from "./loadMore.js";
 
-localStorage.setItem("idsFavoritos", JSON.stringify([]));
-// ids e quantidade de favoritos
-let favoritesList = [];
-var favCount = 0;
-// tag contador nos botões desk e mobile
+// Inicializar localStorage
+if (!localStorage.getItem("idsFavoritos")) {
+  localStorage.setItem("idsFavoritos", JSON.stringify([]));
+}
+
+let favoritesList = JSON.parse(localStorage.getItem("idsFavoritos"));
+let favCount = favoritesList.length;
+let observerFav = null;
+
+// tag com o contador quantidade de favoritos
 const tagCounter = [
   document.getElementById("favorites-counter"),
   document.getElementById("favorites-counter-mobile"),
 ];
 
-export function loadingLocalData() {
-  const pokemons = [...document.querySelectorAll(".card-pokemon")];
-
-  // recuperar ids favoritos salvos localmente
-  favoritesList = JSON.parse(localStorage.getItem("idsFavoritos"));
-
-  if (favoritesList.length === 0) return;
-
-  favCount += favoritesList.length;
-  // controle do contador de favoritos
-  tagCounter.forEach((tag) => {
-    tag.dataset.status = "active";
-    tag.innerText = favoritesList.length;
-  });
-
-  // pokemons favoritados (ref. dados locais)
-  pokemons.forEach((pokemon) => {
-    let cardId = +pokemon
-      .querySelector(".card-pokemon .tag-id p")
-      .innerText.replace("#", "");
-
-    if (favoritesList.includes(cardId)) {
-      let btnFavorite = pokemon.querySelector(".card-pokemon .btn-favorite");
-
-      btnFavorite.dataset.favorite = "true";
-      btnFavorite.style = "background: var(--color-white-primary-50)";
-      btnFavorite.children[0].src = "icons/bg_red_favorited.svg";
-    }
-  });
-}
+// botão desk e mobile "favoritos"
+const favPag = document.querySelectorAll(".favorites-page");
 
 function saveLocal() {
   localStorage.setItem("idsFavoritos", JSON.stringify(favoritesList));
 }
 
+export function loadingLocalData() {
+  const pokemons = [...document.querySelectorAll(".card-pokemon")];
+  favoritesList = JSON.parse(localStorage.getItem("idsFavoritos"));
+
+  tagCounter.forEach((tag) => {
+    if (!tag) return;
+    tag.dataset.status = favoritesList.length > 0 ? "active" : "inactive";
+    tag.innerText = favoritesList.length;
+  });
+
+  if (favoritesList.length === 0) return;
+
+  pokemons.forEach((pokemon) => {
+    const pokemonTag = pokemon.querySelector(".tag-id p");
+    if (!pokemonTag) return;
+
+    let cardId = +pokemonTag.innerText.replace("#", "");
+
+    if (favoritesList.includes(cardId)) {
+      let btnFavorite = pokemon.querySelector(".btn-favorite");
+      if (btnFavorite) {
+        btnFavorite.dataset.favorite = "true";
+        btnFavorite.style.background = "var(--color-white-primary-50)";
+        btnFavorite.children[0].src = "icons/bg_red_favorited.svg";
+      }
+    }
+  });
+}
+
 export function favoritePokemon(cards, pokemonId) {
-  // mapeamento dos cards visíveis na tela
   let btnFav = cards;
   let idNums = [...pokemonId];
-
-  // apenas dos cards visíveis
   const ids = idNums.map((e) => +e.innerText.replace("#", ""));
-  // const ids = idNums;
 
-  // monitorar pokemons favoritados
-  btnFav.forEach((btns, i) =>
-    btns.addEventListener("click", (btn) => {
-      // clique no botão favoritar e interação com contator de favoritos
+  btnFav.forEach((btns, i) => {
+    btns.onclick = (btn) => {
+      // identificar o botão clicado
       const heartBtn = btn.target.closest(".btn-favorite");
+      if (!heartBtn) return;
 
+      // pokémon add aos favoritos
       if (!heartBtn.dataset.favorite) {
-        // estilização
         heartBtn.dataset.favorite = "true";
-        heartBtn.style = "background: var(--color-white-primary-50)";
+        heartBtn.style.background = "var(--color-white-primary-50)";
         heartBtn.children[0].src = "icons/bg_red_favorited.svg";
 
-        // incluir id na lista de favoritos
         favoritesList = [...new Set([...favoritesList, ids[i]])];
-
-        // controle do contador header e barra navegação (mobile)
-        favCount += 1;
-        tagCounter.forEach((tag) => {
-          tag.dataset.status = "active";
-          tag.innerText = favCount;
-        });
-        saveLocal(); // atualizar dados local
       } else {
-        // reverter a estilização
+        // pokémon removido dos favoritos
         heartBtn.dataset.favorite = "";
-        heartBtn.style = "background: var(--color-white-primary-20)";
+        heartBtn.style.background = "var(--color-white-primary-20)";
         heartBtn.children[0].src = "icons/white_favorite.svg";
 
-        //  remover id na lista de favoritos
         favoritesList = favoritesList.filter((id) => id !== ids[i]);
-
-        // controle do contador header e barra navegação (mobile)
-        favCount -= 1;
-        tagCounter.forEach((tag) => {
-          favCount > 0 ? "" : (tag.dataset.status = "inactive");
-          tag.innerText = favCount;
-        });
-        saveLocal(); // atualizar dados local
       }
-      pokemonDetails(false); // impedir que o botão favoritar abra o popup
-    }),
-  );
+
+      // atualizar contadores + tag no front
+      favCount = favoritesList.length;
+      tagCounter.forEach((tag) => {
+        if (!tag) return;
+        tag.dataset.status = favCount > 0 ? "active" : "inactive";
+        tag.innerText = favCount;
+      });
+
+      saveLocal();
+      pokemonDetails(false);
+    };
+  });
+}
+
+function favoritesPage() {
+  favPag.forEach((e) => (e.dataset.status = "active"));
+
+  // ocultar tags de classe
+  const carousel = document.querySelector(".carousel-class");
+  if (carousel) carousel.innerHTML = "";
+
+  // paro o carregamento infinito dos cards + ocultar animação
+  stopAutoLoading();
+  const loadingAnim = document.querySelector("#loading-animation");
+  if (loadingAnim) loadingAnim.innerHTML = "";
+
+  cardsList.innerHTML = "";
+
+  if (favoritesList.length > 0) {
+    feedbackText.innerHTML = `
+        <p class="h6"><span class="text-bold">Lista de favoritos</span></p>
+        <p class="body-larger">Sua lista contém <span>${favoritesList.length}</span>${favoritesList.length > 1 ? " pokémons" : " pokémon"}</p>`;
+
+    // filtrar e criar os cards
+    const favorites = allPokemons.filter((pokemon) =>
+      favoritesList.includes(pokemon.id),
+    );
+
+    createCard(favorites);
+    // começo a monitorar mudanças depois de criar os cards
+    liveFavorites();
+  } else {
+    fetch("./partials/empty-search.html")
+      .then((r) => r.text())
+      .then((template) => {
+        const container = document.getElementById("empty-search");
+        if (!container) return;
+        container.innerHTML = template;
+        container.querySelector(".h6").innerText =
+          "Sua lista de favoritos está vazia";
+        container.querySelector(".body-larger").innerText =
+          "Quem sabe o pokémon surpresa é aquele que você procura!";
+      });
+  }
+}
+
+favPag.forEach((e) => {
+  e.addEventListener("click", (event) => {
+    event.preventDefault();
+    favoritesPage();
+    loadingLocalData();
+  });
+});
+
+export function liveFavorites() {
+  const icons = document.querySelectorAll(".btn-favorite");
+  if (icons.length === 0) return;
+
+  if (observerFav) observerFav.disconnect();
+
+  observerFav = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      // pokémon removido dos favoritos
+      if (
+        mutation.attributeName === "data-favorite" &&
+        !mutation.target.dataset.favorite
+      ) {
+        const totalFavoritos = feedbackText.querySelector(".body-larger span");
+
+        if (totalFavoritos) {
+          const currentVal = parseInt(totalFavoritos.innerText);
+          totalFavoritos.innerText =
+            currentVal > 1
+              ? currentVal - 1
+              : fetch("./partials/empty-search.html")
+                  .then((r) => r.text())
+                  .then((template) => {
+                    const container = document.getElementById("empty-search");
+                    if (!container) return;
+                    feedbackText.innerHTML = "";
+                    container.innerHTML = template;
+                    container.querySelector(".h6").innerText =
+                      "Sua lista de favoritos está vazia";
+                    container.querySelector(".body-larger").innerText =
+                      "Quem sabe o pokémon surpresa é aquele que você procura!";
+                  });
+        }
+
+        // ocultar card removido dos favoritos
+        const card = mutation.target.closest(".card-pokemon");
+        card.style.display = "none";
+      }
+    });
+  });
+
+  icons.forEach((icon) => {
+    observerFav.observe(icon, {
+      attributes: true,
+      attributeFilter: ["data-favorite"],
+    });
+  });
 }

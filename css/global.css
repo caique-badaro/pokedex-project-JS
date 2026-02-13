@@ -521,6 +521,9 @@ a {
   gap: 0.25rem;
   padding: 2% 10%;
 }
+.filter-feedback .h6 {
+  color: var(--color-gray-primary-80);
+}
 .filter-feedback .body-larger {
   color: var(--color-gray-primary-80);
 }
@@ -750,6 +753,7 @@ footer .body-default {
   .filter-feedback {
     padding: 2% 5%;
   }
+
   footer {
     padding: 5% 5% 20% 5%;
   }
