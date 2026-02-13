@@ -96,6 +96,9 @@ export function favoritePokemon(cards, pokemonId) {
 }
 
 function favoritesPage() {
+  // resetar scroll para o topo da página
+  window.scrollTo(0, 0);
+
   favPag.forEach((e) => (e.dataset.status = "active"));
 
   // ocultar tags de classe
@@ -123,16 +126,12 @@ function favoritesPage() {
     // começo a monitorar mudanças depois de criar os cards
     liveFavorites();
   } else {
-    fetch("./partials/empty-search.html")
+    fetch("./partials/empty-favorite-list.html")
       .then((r) => r.text())
       .then((template) => {
         const container = document.getElementById("empty-search");
         if (!container) return;
         container.innerHTML = template;
-        container.querySelector(".h6").innerText =
-          "Sua lista de favoritos está vazia";
-        container.querySelector(".body-larger").innerText =
-          "Quem sabe o pokémon surpresa é aquele que você procura!";
       });
   }
 }
@@ -159,26 +158,34 @@ export function liveFavorites() {
         !mutation.target.dataset.favorite
       ) {
         const totalFavoritos = feedbackText.querySelector(".body-larger span");
+        const currentVal = parseInt(totalFavoritos.innerText);
 
-        if (totalFavoritos) {
-          const currentVal = parseInt(totalFavoritos.innerText);
-          totalFavoritos.innerText =
-            currentVal > 1
-              ? currentVal - 1
-              : fetch("./partials/empty-search.html")
-                  .then((r) => r.text())
-                  .then((template) => {
-                    const container = document.getElementById("empty-search");
-                    if (!container) return;
-                    feedbackText.innerHTML = "";
-                    container.innerHTML = template;
-                    container.querySelector(".h6").innerText =
-                      "Sua lista de favoritos está vazia";
-                    container.querySelector(".body-larger").innerText =
-                      "Quem sabe o pokémon surpresa é aquele que você procura!";
-                  });
+        if (totalFavoritos && currentVal === 1) {
+          // cria template de lista vazia
+          fetch("./partials/empty-favorite-list.html")
+            .then((r) => r.text())
+            .then((template) => {
+              const container = document.getElementById("empty-search");
+              if (!container) return;
+              feedbackText.innerHTML = "";
+              container.innerHTML = template;
+            });
+        } else if (totalFavoritos && currentVal > 1) {
+          // ajusta o título + feedback quantidade
+          feedbackText.innerHTML = `
+        <p class="h6"><span class="text-bold">Lista de favoritos</span></p>
+        <p class="body-larger">Sua lista contém <span>${currentVal - 1}</span>${currentVal === 1 ? " pokémon" : " pokémons"}</p>`;
+        } else if (totalFavoritos === 0) {
+          // cria template de lista vazia
+          fetch("./partials/empty-favorite-list.html")
+            .then((r) => r.text())
+            .then((template) => {
+              const container = document.getElementById("empty-search");
+              if (!container) return;
+              feedbackText.innerHTML = "";
+              container.innerHTML = template;
+            });
         }
-
         // ocultar card removido dos favoritos
         const card = mutation.target.closest(".card-pokemon");
         card.style.display = "none";

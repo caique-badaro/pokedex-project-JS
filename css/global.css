@@ -595,6 +595,7 @@ footer {
   background: var(--color-gray-primary-5);
   text-decoration: none;
   color: var(--color-gray-primary-80);
+  bottom: 0;
 }
 footer img {
   opacity: 0.8;
@@ -755,6 +756,9 @@ footer .body-default {
   }
 
   footer {
+    flex-direction: column;
+    gap: 1rem;
+    bottom: 0;
     padding: 5% 5% 20% 5%;
   }
 }

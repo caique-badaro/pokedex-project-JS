@@ -1,6 +1,7 @@
 import { cardsList, createCard } from "./createCard.js";
 import { pokeapi } from "./pokeapi.js";
 import { loadingLocalData } from "./favoritePokemon.js";
+import { loadingAll, listTags } from "./filterPokemon.js";
 
 // controle para definir o final da lista de pokémons
 let offset = 0;
@@ -57,4 +58,11 @@ function autoLoading() {
 document.getElementById("logo-home").addEventListener("click", () => {
   cardsList.innerHTML = "";
   offset = 0;
+});
+
+// logo home (recarregar página)
+document.getElementById("logo-home").addEventListener("click", (event) => {
+  event.preventDefault();
+  location.reload();
+  window.scrollTo(0, 0);
 });

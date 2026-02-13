@@ -21,6 +21,7 @@
 }
 #empty-search .content .body-larger {
   color: var(--color-gray-primary-50);
+  text-align: center;
 }
 @keyframes spinPokeball {
   0% {
@@ -55,6 +56,74 @@
 #loading-animation .animate-pokeball {
   width: clamp(56px, 56px, 96px);
   animation: spinPokeball 1s linear infinite;
+}
+
+/* fitros de ordenação */
+.sorting-options {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-radius: var(--radius-small);
+  background: var(--color-background-white-default);
+  position: absolute;
+  box-shadow: var(--shadow-card);
+  top: 40px;
+  right: 0;
+  width: max-content;
+}
+.sorting-options .order {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-gray-primary-5);
+}
+.sorting-options .order img {
+  width: 1.25rem;
+}
+.sorting-options .order-choice {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex: 1;
+}
+.sorting-options .order-choice p:nth-child(1) {
+  width: 72px;
+}
+.sorting-options .order-choice p:nth-child(2),
+.sorting-options .order-choice p:nth-child(3) {
+  padding: 0.5rem;
+  color: var(--color-red-primary);
+  border-radius: var(--radius-small);
+  border: 1px solid var(--color-red-primary);
+  opacity: 0.5;
+  text-align: center;
+  flex: 1;
+  min-width: 80px;
+}
+.sorting-options .order-choice p:nth-child(2):hover,
+.sorting-options .order-choice p:nth-child(3):hover {
+  opacity: 1;
+  cursor: pointer;
+  color: var(--color-gray-primary-80);
+  background: var(--color-yellow-primary);
+  border: 1px solid var(--color-yellow-primary);
+}
+.btn-filter {
+  cursor: pointer;
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  background: var(--color-background-white-default);
+  color: var(--color-red-primary);
+  border-radius: var(--radius-small);
+  border: 1px solid var(--color-red-primary);
+  flex: 1;
+}
+.order .btn-filter:nth-child(2) {
+  color: var(--color-gray-primary-80);
+  background: var(--color-yellow-primary);
+  border: 1px solid var(--color-yellow-primary);
 }
 
 /* mobile */

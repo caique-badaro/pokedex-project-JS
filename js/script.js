@@ -7,6 +7,7 @@ import {
   favoritePokemon,
   loadingLocalData,
 } from "./modules/favoritePokemon.js";
+import { sortCards } from "./modules/sortingFilters.js";
 
 pokeapi();
 await loadMore();
