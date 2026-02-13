@@ -1,7 +1,7 @@
 import { pokeapi } from "./pokeapi.js";
 import { createCard } from "./createCard.js";
 import { stopAutoLoading } from "./loadMore.js";
-import { favoritePokemon, loadingLocalData } from "./favoritePokemon.js";
+import { loadingLocalData } from "./favoritePokemon.js";
 
 // array global com todos os pokémons
 export const allPokemons = await loadingAll();
