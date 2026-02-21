@@ -94,6 +94,7 @@ export async function createCard(pokemonsInfo) {
   let cards = document.querySelectorAll(".card-pokemon");
   let mapCards = document.querySelectorAll(".card-pokemon .btn-favorite");
   let mapIds = document.querySelectorAll(".card-pokemon .tag-id p");
+  //distribuindo as informações dos cards visíveis para outras funções
   favoritePokemon(mapCards, mapIds);
   sortCards(cards);
 }

@@ -66,46 +66,16 @@
             <p class="body-larger">Favoritos</p>
           </div>
         </a>
-        <a href="#" class="link-desktop" data-status="inactive">
+        <a
+          href="#"
+          class="link-desktop"
+          data-status="inactive"
+          data-sorting="active">
           <div class="container">
             <img src="icons/gray_filter_alt.svg" alt="Ordenar" />
             <p class="body-larger">Ordenar</p>
           </div>
-          <div class="sorting-options">
-            <div class="order">
-              <img src="icons/gray_exercise.svg" alt="força" title="força" />
-              <div class="order-choice">
-                <p class="body-larger">Força:</p>
-                <p class="body-larger text-bold">Mais forte</p>
-                <p class="body-larger text-bold">Mais fraco</p>
-              </div>
-            </div>
-            <div class="order">
-              <img src="icons/gray_sort_by_alpha.svg" alt="nome" title="nome" />
-              <div class="order-choice">
-                <p class="body-larger">Nome:</p>
-                <p class="body-larger text-bold" data-order="AZ">A - Z</p>
-                <p class="body-larger text-bold">Z - A</p>
-              </div>
-            </div>
-            <div class="order">
-              <img src="icons/gray_badge.svg" alt="Id" title="Id" />
-              <div class="order-choice">
-                <p class="body-larger">Número:</p>
-                <p class="body-larger text-bold">0 - 9</p>
-                <p class="body-larger text-bold">9 - 0</p>
-              </div>
-            </div>
-            <!-- botão aplicar ordenação/limpar -->
-            <div class="order">
-              <button class="btn-filter">
-                <p class="body-larger">Limpar</p>
-              </button>
-              <button class="btn-filter">
-                <p class="body-larger text-bold">Aplicar<span> (3)</span></p>
-              </button>
-            </div>
-          </div>
+          <!-- inserir filtro aqui -->
         </a>
       </div>
     </div>
@@ -131,11 +101,15 @@
           class="body-small favorites-counter"></p>
         <p class="body-label-default">Favoritos</p>
       </a>
-      <a class="link-mobile" data-status="default" href="#">
+      <a
+        class="link-mobile"
+        data-status="default"
+        data-sorting="active"
+        href="#">
         <div class="icon-container">
-          <img src="icons/gray_filter_alt.svg" alt="Filtrar" />
+          <img src="icons/gray_filter_alt.svg" alt="Ordenar" />
         </div>
-        <p class="body-label-default">Filtrar</p>
+        <p class="body-label-default">Ordenar</p>
       </a>
     </div>
     <!-- carousel class filter-->
@@ -180,6 +154,10 @@
         alt="" />
     </div>
 
+    <!-- filtros avançados mobile -->
+    <div class="filter-mobile">
+      <!-- inserir filtro aqui -->
+    </div>
     <!-- modal desktop and mobile -->
     <div
       id="modal-pokemon-details"
