@@ -71,8 +71,8 @@
   background: var(--color-background-white-default);
   position: absolute;
   box-shadow: var(--shadow-card);
-  top: 40px;
-  right: 0;
+  top: 72px;
+  right: 10%;
   width: max-content;
 }
 .sorting-options .order {
@@ -154,6 +154,7 @@
   .sorting-options {
     position: fixed;
     top: auto;
+    right: 0;
     bottom: 0;
     flex: 1;
     width: 100%;
