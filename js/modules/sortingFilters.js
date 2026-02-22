@@ -1,5 +1,6 @@
 const overlayBG = document.querySelector(".bg--bottom-sheet-overlay");
 const viewFilter = document.querySelector(".filter-mobile");
+const btnSorting = document.querySelector(".link-desktop:nth-last-child(1)");
 
 export function sortCards(cardList) {
   // todos os cards visíveis gerados pela função createCard()
@@ -32,12 +33,12 @@ fetch("./partials/sorting-options.html")
     // monitorar clique
     sortingBtn.forEach((btn) =>
       btn.addEventListener("click", (e) => {
+        e.stopPropagation();
         const btn =
           e.target.closest(".link-mobile") || e.target.closest(".link-desktop");
 
         // validação de segurança
         if (!btn) return;
-
         e.preventDefault();
 
         // identifiquei se o clique é em dispositivos mobile
@@ -46,29 +47,58 @@ fetch("./partials/sorting-options.html")
           overlayBG.dataset.status = "active";
           viewFilter.innerHTML = template;
         } else {
-          // estilização botão filtros de ordenação somente desktop
+          // estilização botão filtros de ordenação desktop
           // mobile o bottom sheet sobrepoe a barra de navegação
-          btn.dataset.status === "inactive"
-            ? (btn.dataset.status = "active")
-            : (btn.dataset.status = "inactive");
+          if (!document.querySelector(".sorting-options")) {
+            btn.dataset.status = "active";
+            btnSorting.insertAdjacentHTML("afterend", template);
+          } else {
+            let filterPanel = document.querySelector(".sorting-options");
+            btn.dataset.status === "active"
+              ? ((filterPanel.style = "display: none"),
+                (btn.dataset.status = "inactive"))
+              : ((filterPanel.style = "display: flex"),
+                (btn.dataset.status = "active"));
+          }
 
-          btn
-            .querySelector(".container")
-            .insertAdjacentHTML("beforeend", template);
-
+          // controle exibir/ocultar
           const controls = Array.from(document.querySelectorAll(".btn-filter"));
+          const popup = document.querySelector(".sorting-options");
 
-          controls.forEach((btn) =>
-            btn.addEventListener("click", (e) => {
-              const btn = e.target.closest(".btn-filter");
+          if (popup.dataset.status === "hidden") {
+            popup.style = "display: flex";
+            popup.dataset.status = "visible";
+          }
 
-              if (!btn) return;
+          controls.forEach((btnSorting) =>
+            btnSorting.addEventListener("click", (e) => {
+              const btnSorting = e.target.closest(".btn-filter");
 
-              // continuar aqui, incluindo o comportamento de fechar / abrir o painel de filtros
+              if (!btnSorting) return;
+
+              // config fechar filtros 'Cancelar'
+              if (btnSorting === controls[0]) {
+                popup.dataset.status = "hidden";
+                popup.style = "display: none";
+                btn.dataset.status = "inactive";
+
+                console.log("funcionou", popup.dataset.status);
+              }
             }),
           );
 
-          console.log(controls);
+          // monitorar clique fora do painel de filtros
+          document.addEventListener("click", (event) => {
+            if (!popup.contains(event.target)) {
+              popup.dataset.status = "hidden";
+              popup.style = "display: none";
+              btn.dataset.status = "inactive";
+            }
+          });
+
+          // andamento....... capturar cliques nos filtros + monitorar cliques fora do painel de filtros
+
+          // console.log(controls);
         }
       }),
     );
