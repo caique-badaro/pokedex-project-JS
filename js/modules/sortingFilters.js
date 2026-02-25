@@ -22,7 +22,13 @@ export function sortCards(cardList) {
   cards.forEach((card) => grid.appendChild(card));
 }
 
-// monitorar clique nos botões de ordenação dos cards
+function applySorting(el) {
+  console.log(el);
+
+  // construir aplicação da ordenação
+}
+
+// monitorar clique nos botões odernação (desktop e mobile)
 const sortingBtn = Array.from(
   document.querySelectorAll('[data-sorting="active"]'),
 );
@@ -47,8 +53,8 @@ fetch("./partials/sorting-options.html")
           overlayBG.dataset.status = "active";
           viewFilter.innerHTML = template;
         } else {
-          // estilização botão filtros de ordenação desktop
-          // mobile o bottom sheet sobrepoe a barra de navegação
+          // estilização + comportamento desktop
+          // importante: mobile o popup sobrepoe a barra de navegação
           if (!document.querySelector(".sorting-options")) {
             btn.dataset.status = "active";
             btnSorting.insertAdjacentHTML("afterend", template);
@@ -64,41 +70,95 @@ fetch("./partials/sorting-options.html")
           // controle exibir/ocultar
           const controls = Array.from(document.querySelectorAll(".btn-filter"));
           const popup = document.querySelector(".sorting-options");
+          const filters = Array.from(
+            document.querySelectorAll('[data-filter="enabled"]'),
+          );
+          const btnApply = controls[1];
 
-          if (popup.dataset.status === "hidden") {
-            popup.style = "display: flex";
-            popup.dataset.status = "visible";
+          btnApply.addEventListener("click", () => {
+            const spanValue = btnApply.querySelector("span");
+            if (spanValue && spanValue.dataset.value) {
+              const dataValue = spanValue.dataset.value;
+              applySorting(dataValue);
+              clearChoices();
+
+              if (document.querySelector(".value-filter")) {
+                document.querySelector(".value-filter").remove();
+              }
+
+              let feedback = `
+              <p class="body-larger value-filter">
+                ${spanValue.innerText.replace(/[()]/g, "")}
+                <img id="clearOrder" src="icons/red_close.svg" alt="Limpar" title="Limpar" /></p>`;
+
+              // feedback escolha de filtro aplicado
+              btn.insertAdjacentHTML("beforeend", feedback);
+              btnClearFilter();
+            }
+          });
+
+          function btnClearFilter() {
+            let btnClear = document.getElementById("clearOrder");
+
+            btnClear.addEventListener("click", () =>
+              document.querySelector(".value-filter").remove(),
+            );
           }
 
+          function clearChoices() {
+            popup.dataset.status = "hidden";
+            popup.style.display = "none";
+
+            if (typeof btn !== "undefined") btn.dataset.status = "inactive";
+
+            if (btnApply.dataset.status === "disabled") return;
+            else {
+              btnApply.dataset.status = "disabled";
+              btnApply.innerHTML = "Aplicar";
+              filters.forEach((el) => el.classList.remove("selected"));
+            }
+          }
+
+          function activeChoice(dataValue, textOrder) {
+            btnApply.dataset.status = "active";
+            btnApply.innerHTML = `<p class="body-larger text-bold">Aplicar<span class="body-default text-regular" data-value="${dataValue}"> (${textOrder})</span></p>`;
+          }
+
+          filters.forEach((filterBtn) =>
+            filterBtn.addEventListener("click", (choice) => {
+              filters.forEach((el) => el.classList.remove("selected"));
+              choice.currentTarget.classList.add("selected");
+
+              let dataValue = choice.currentTarget.dataset.order;
+              let textOrder = choice.currentTarget.innerText;
+
+              activeChoice(dataValue, textOrder);
+            }),
+          );
+
+          // fechar filtros btn cancelar
           controls.forEach((btnSorting) =>
             btnSorting.addEventListener("click", (e) => {
-              const btnSorting = e.target.closest(".btn-filter");
+              const targetBtn = e.target.closest(".btn-filter");
+              if (!targetBtn) return;
 
-              if (!btnSorting) return;
-
-              // config fechar filtros 'Cancelar'
-              if (btnSorting === controls[0]) {
-                popup.dataset.status = "hidden";
-                popup.style = "display: none";
-                btn.dataset.status = "inactive";
-
-                console.log("funcionou", popup.dataset.status);
+              if (targetBtn === controls[0]) {
+                clearChoices();
               }
             }),
           );
 
           // monitorar clique fora do painel de filtros
           document.addEventListener("click", (event) => {
-            if (!popup.contains(event.target)) {
-              popup.dataset.status = "hidden";
-              popup.style = "display: none";
-              btn.dataset.status = "inactive";
+            if (
+              popup &&
+              !popup.contains(event.target) &&
+              typeof btn !== "undefined" &&
+              !btn.contains(event.target)
+            ) {
+              clearChoices();
             }
           });
-
-          // andamento....... capturar cliques nos filtros + monitorar cliques fora do painel de filtros
-
-          // console.log(controls);
         }
       }),
     );

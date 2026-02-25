@@ -3,24 +3,39 @@
     <img src="icons/gray_exercise.svg" alt="força" title="força" />
     <div class="order-choice">
       <p class="body-larger">Força:</p>
-      <p class="body-larger text-bold">Mais forte</p>
-      <p class="body-larger text-bold">Mais fraco</p>
+      <p
+        class="body-larger text-bold"
+        data-filter="enabled"
+        data-order="strong">
+        Mais forte
+      </p>
+      <p class="body-larger text-bold" data-filter="enabled" data-order="weak">
+        Mais fraco
+      </p>
     </div>
   </div>
   <div class="order">
     <img src="icons/gray_sort_by_alpha.svg" alt="nome" title="nome" />
     <div class="order-choice">
       <p class="body-larger">Nome:</p>
-      <p class="body-larger text-bold" data-order="AZ">A - Z</p>
-      <p class="body-larger text-bold">Z - A</p>
+      <p class="body-larger text-bold" data-filter="enabled" data-order="A-Z">
+        A - Z
+      </p>
+      <p class="body-larger text-bold" data-filter="enabled" data-order="Z-A">
+        Z - A
+      </p>
     </div>
   </div>
   <div class="order">
     <img src="icons/gray_badge.svg" alt="Id" title="Id" />
     <div class="order-choice">
-      <p class="body-larger">Número:</p>
-      <p class="body-larger text-bold">0 - 9</p>
-      <p class="body-larger text-bold">9 - 0</p>
+      <p class="body-larger">Núm. ID:</p>
+      <p class="body-larger text-bold" data-filter="enabled" data-order="0-9">
+        0 - 9
+      </p>
+      <p class="body-larger text-bold" data-filter="enabled" data-order="9-0">
+        9 - 0
+      </p>
     </div>
   </div>
   <!-- botão aplicar ordenação/limpar -->
@@ -28,8 +43,8 @@
     <button class="btn-filter">
       <p class="body-larger">Cancelar</p>
     </button>
-    <button class="btn-filter">
-      <p class="body-larger text-bold">Aplicar<span> (3)</span></p>
+    <button class="btn-filter" data-status="disabled">
+      <p class="body-larger text-bold">Aplicar</p>
     </button>
   </div>
 </div>
