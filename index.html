@@ -66,17 +66,6 @@
             <p class="body-larger">Favoritos</p>
           </div>
         </a>
-        <a
-          href="#"
-          class="link-desktop"
-          data-status="inactive"
-          data-sorting="active">
-          <div class="container">
-            <img src="icons/gray_filter_alt.svg" alt="Ordenar" />
-            <p class="body-larger">Ordenar</p>
-          </div>
-        </a>
-        <!-- inserir filtro aqui -->
       </div>
     </div>
     <!-- navbar mobile -->
@@ -132,8 +121,21 @@
         <img src="icons/gray_arrow_forward.svg" alt="avançar" />
       </div>
     </div>
-    <!-- filter feedback -->
-    <div id="search-resuls-filter" class="filter-feedback"></div>
+    <!-- filter feedback + ordenação -->
+    <div class="content-block">
+      <div id="search-resuls-filter" class="filter-feedback"></div>
+      <a
+        href="#"
+        class="link-desktop"
+        data-status="inactive"
+        data-sorting="active">
+        <div class="container">
+          <img src="icons/gray_filter_alt.svg" alt="Ordenar" />
+          <p class="body-larger">Ordenar</p>
+        </div>
+      </a>
+    </div>
+
     <!-- empty search -->
     <div id="empty-search"></div>
     <!-- grid cards -->
