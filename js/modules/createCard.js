@@ -9,6 +9,8 @@ export async function createCard(pokemonsInfo) {
     const card = document.createElement("div");
     card.classList.add("card-pokemon");
     card.dataset.id = pokemon.id;
+    card.dataset.power = pokemon.power;
+    card.dataset.name = pokemon.name;
 
     // conteúdo card
     card.innerHTML = `

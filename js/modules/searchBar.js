@@ -5,7 +5,6 @@ import { loadingLocalData } from "./favoritePokemon.js";
 import { pokemonDetails } from "./pokemonDetails.js";
 
 const searchInput = document.getElementById("search-bar");
-const searchbtn = document.getElementById("btn-search");
 
 let timer;
 
