@@ -13,6 +13,7 @@
   /* red */
   --color-red-primary: #ff3c3c;
   --color-red-primary-20: #ff3c3c33;
+  --color-red-primary-10: rgba(255, 60, 60, 0.1);
   /* yellow */
   --color-yellow-primary: #ffca02;
   --color-yellow-primary-15: #ffca0026;
@@ -437,6 +438,10 @@ a {
   opacity: 0.8;
 }
 
+.content-block .link-desktop {
+  background: none;
+}
+
 .value-filter {
   display: flex;
   gap: 0.25rem;
@@ -535,6 +540,7 @@ a {
   display: flex;
   justify-content: space-between;
   padding: 2% 10%;
+  position: relative;
 }
 
 /* feedback resultado da busca/filtros */

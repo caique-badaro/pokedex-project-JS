@@ -59,6 +59,7 @@
 }
 
 /* fitros de ordenação */
+.mobile-feedback,
 .filter-mobile {
   display: none;
 }
@@ -71,7 +72,7 @@
   background: var(--color-background-white-default);
   position: absolute;
   box-shadow: var(--shadow-card);
-  top: 72px;
+  top: 80px;
   right: 10%;
   width: 400px;
 }
@@ -166,5 +167,21 @@
     width: 100%;
     padding: 1rem 0 0 0;
     border-radius: 12px 12px 0 0;
+  }
+
+  .mobile-feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .mobile-feedback .body-small {
+    color: var(--color-gray-primary-80);
+    text-align: right;
+    padding-right: 0.25rem;
+  }
+  .mobile-feedback .value-filter {
+    background: var(--color-red-primary-10);
+    border: none;
+    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
   }
 }
