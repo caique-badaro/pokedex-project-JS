@@ -1,5 +1,6 @@
 import { favoritePokemon } from "./favoritePokemon.js";
 import { sortCards } from "./sortingFilters.js";
+import { btnSort } from "./searchBar.js";
 
 export const cardsList = document.getElementById("grid-cards");
 
@@ -91,6 +92,9 @@ export async function createCard(pokemonsInfo) {
     // adiciona o card dentro do grid
     cardsList.appendChild(card);
   });
+
+  // reativer filtro
+  if (btnSort.dataset.status === "hidden") btnSort.dataset.status = "inactive";
 
   // mapeamento dos cards criados para identificar os pokémons favoritados
   let cards = document.querySelectorAll(".card-pokemon");

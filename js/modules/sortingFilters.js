@@ -81,7 +81,7 @@ fetch("./partials/sorting-options.html")
         } else {
           // já existe
           let filterPanel = document.querySelector(".sorting-options");
-          btn.dataset.status === "active"
+          btn.dataset.status === "active" || btn.dataset.status === "hidden"
             ? ((filterPanel.style = "display: none"),
               (btn.dataset.status = "inactive"))
             : ((filterPanel.style = "display: flex"),

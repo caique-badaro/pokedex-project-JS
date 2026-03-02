@@ -442,6 +442,10 @@ a {
   background: none;
 }
 
+.content-block .link-desktop[data-status="hidden"] {
+  display: none;
+}
+
 .value-filter {
   display: flex;
   gap: 0.25rem;
