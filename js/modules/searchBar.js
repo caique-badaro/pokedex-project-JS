@@ -3,8 +3,10 @@ import { allPokemons, feedbackText } from "./filterPokemon.js";
 import { stopAutoLoading } from "./loadMore.js";
 import { loadingLocalData } from "./favoritePokemon.js";
 import { pokemonDetails } from "./pokemonDetails.js";
+import { favPag } from "./favoritePokemon.js";
 
 const searchInput = document.getElementById("search-bar");
+export const btnSort = document.querySelector(".content-block .link-desktop");
 
 let timer;
 
@@ -33,6 +35,11 @@ searchInput.addEventListener("input", (event) => {
           document.querySelector("#empty-search .content .h6 span").innerText =
             feedback;
 
+          // ocultar botão filtrar/ordenar (desktop)
+          if (btnSort) btnSort.dataset.status = "hidden";
+
+          favPag.forEach((e) => (e.dataset.status = "inactive"));
+
           let surprise = document.getElementById("surprise-empty-search");
 
           surprise.addEventListener("click", (event) => {
@@ -50,6 +57,10 @@ searchInput.addEventListener("input", (event) => {
       tagList.forEach((tag) => (tag.dataset.filterClass = "inactive"));
       loadingLocalData();
     } else {
+      //limpar template busca vazia
+      let emptySearch = document.getElementById("empty-search");
+      if (emptySearch) emptySearch.innerHTML = "";
+
       feedbackText.innerHTML = `
         <p class="body-larger">Você pesquisou por: <span class="text-bold">${feedback}</span></p>
         <p class="body-small">${pokemons.length > 1 ? `Foram localizados ` : `Foi localizado `}<span>${pokemons.length}</span>${pokemons.length > 1 ? ` pokémons` : ` pokémon`}</p>`;
@@ -70,7 +81,7 @@ searchInput.addEventListener("input", (event) => {
       ...new Set(
         busca
           .toLowerCase()
-          .replace(/[^a-zA-Z0-9 ]/g, "")
+          .replace(/[^a-zA-Z0-9]/g, "")
           .split(" ")
           .filter((item) => item !== ""),
       ),

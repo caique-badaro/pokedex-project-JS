@@ -19,7 +19,7 @@ const tagCounter = [
 ];
 
 // botão desk e mobile "favoritos"
-const favPag = document.querySelectorAll(".favorites-page");
+export const favPag = document.querySelectorAll(".favorites-page");
 
 function saveLocal() {
   localStorage.setItem("idsFavoritos", JSON.stringify(favoritesList));
@@ -104,6 +104,10 @@ function favoritesPage() {
   // ocultar tags de classe
   const carousel = document.querySelector(".carousel-class");
   if (carousel) carousel.innerHTML = "";
+
+  //limpar template busca vazia
+  let emptySearch = document.getElementById("empty-search");
+  if (emptySearch) emptySearch.innerHTML = "";
 
   // paro o carregamento infinito dos cards + ocultar animação
   stopAutoLoading();
