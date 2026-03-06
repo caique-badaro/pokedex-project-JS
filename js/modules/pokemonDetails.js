@@ -1,8 +1,8 @@
-// (1) configuração para abrir e fechar o modal com todos os detalhes sobre o pokémon selecionado.
-// (2) configuração para ativar o botão "surpreenda-me"
 import { loadingAll, allPokemons } from "./filterPokemon.js";
 
+// estrutura do modal
 const popup = document.getElementById("modal-pokemon-details");
+export const overlay = document.querySelector(".bg--bottom-sheet-overlay");
 
 // random pokemon btn
 const surprisePokemon = [
@@ -12,7 +12,7 @@ const surprisePokemon = [
 ];
 
 // construção objeto com todos os elementos do popup
-const popupElements = {
+export const popupElements = {
   id: popup.querySelector("#popup-pokemon-id .body-larger"),
   bgHeader: popup.querySelector("#popup-bg-color"),
   name: popup.querySelector("#modal-pokemon-details .pokemon-name .h2"),
@@ -22,18 +22,11 @@ const popupElements = {
   image: popup.querySelector("#modal-pokemon-image img"),
   skills: popup.querySelectorAll("#modal-pokemon-details .skill-modal"),
   specialSkills: popup.querySelector("#content-special-skill"),
-  controls: [
-    popup, // popup
-    document.querySelector(".controls--bottom-sheet"), // controles
-    document.querySelector(".bg--bottom-sheet-overlay"), // overlay
-  ],
+  controls: [popup, document.querySelector(".controls--bottom-sheet"), overlay],
 };
 
 // fechar modal
-const closeModal = [
-  document.getElementById("modal-btn-close"),
-  popupElements.controls[2],
-];
+const closeModal = [document.getElementById("modal-btn-close"), overlay];
 
 export function pokemonDetails(idPokemon) {
   // pre-loading dados
@@ -42,8 +35,9 @@ export function pokemonDetails(idPokemon) {
   if (!pokemon) return;
 
   popupElements.controls.forEach((el) => {
-    el.dataset.status = "inactive" ? "active" : "";
+    el.dataset.status = "active";
   });
+  overlay.dataset.status = "active";
   loadContent(pokemon);
 }
 
@@ -165,22 +159,25 @@ surprisePokemon.forEach((btnSurprise) => {
   });
 });
 
-// controle para abrir e fechar modal
-closeModal.forEach((el) => {
-  el.addEventListener("click", (element) => {
-    const localClick =
-      element.target.closest("#modal-btn-close") ||
-      element.target.closest(".bg--bottom-sheet-overlay");
+function fecharModal() {
+  // controle para abrir e fechar modal
+  closeModal.forEach((el) => {
+    el.addEventListener("click", (element) => {
+      const localClick =
+        element.target.closest("#modal-btn-close") ||
+        element.target.closest('[data-type="overlay-bg"]');
 
-    if (!localClick) return;
+      if (!localClick) return;
 
-    element.preventDefault();
+      element.preventDefault();
 
-    popupElements.controls.forEach((el) => {
-      el.dataset.status = "active" ? "inactive" : "";
+      popupElements.controls.forEach((el) => {
+        el.dataset.status = "inactive";
+      });
+      overlay.dataset.status = "inactive";
     });
   });
-});
+}
 
 // abrir detalhes do card
 document.addEventListener("click", (e) => {
@@ -195,3 +192,8 @@ document.addEventListener("click", (e) => {
 
   pokemonDetails(pokemonId);
 });
+
+function toggleStatus(el) {
+  el.dataset.status = el.dataset.status === "active" ? "inactive" : "active";
+}
+fecharModal();
