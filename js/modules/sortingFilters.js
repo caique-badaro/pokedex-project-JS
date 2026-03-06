@@ -1,5 +1,3 @@
-const overlayBG = document.querySelector(".bg--bottom-sheet-overlay");
-const viewFilter = document.querySelector(".filter-mobile");
 const btnSorting = document.querySelector(".content-block .link-desktop");
 const grid = document.getElementById("grid-cards");
 
@@ -89,7 +87,14 @@ fetch("./partials/sorting-options.html")
         }
 
         if (btn.classList.contains("link-mobile")) {
-          overlayBG.dataset.status = "active";
+          let footer = document.querySelector("footer");
+
+          if (!document.querySelector(".bg--filter-overlay")) {
+            const overlay = document.createElement("div");
+            overlay.classList.add("bg--filter-overlay");
+
+            footer.insertAdjacentElement("beforebegin", overlay);
+          }
         }
 
         // controle exibir/ocultar
@@ -144,7 +149,10 @@ fetch("./partials/sorting-options.html")
         function clearChoices() {
           popup.dataset.status = "hidden";
           popup.style.display = "none";
-          overlayBG.dataset.status = "inactive";
+
+          let overlayFilter = document.querySelector(".bg--filter-overlay");
+
+          if (overlayFilter) overlayFilter.remove();
 
           if (typeof btn !== "undefined") btn.dataset.status = "inactive";
 

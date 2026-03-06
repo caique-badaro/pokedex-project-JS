@@ -576,6 +576,7 @@ a {
 }
 
 /* overlay */
+.bg--filter-overlay,
 .bg--bottom-sheet-overlay[data-status="active"] {
   background: var(--color-gray-primary-80);
   backdrop-filter: blur(0.25rem);
