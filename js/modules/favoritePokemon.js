@@ -204,3 +204,64 @@ export function liveFavorites() {
     });
   });
 }
+
+const popupFavBtn = document.querySelector(
+  '[data-button-favorite="available"]',
+);
+
+export function popupFavoritePokemon(id) {
+  // validação id + reset estilização
+  if (!id) return;
+  popupFavBtn.dataset.favorite = "";
+  popupFavBtn.style.background = "var(--color-white-primary-20)";
+  popupFavBtn.children[0].src = "icons/white_favorite.svg";
+
+  // consulta se o pokemon consta na lista de favoritos
+  favoritesList.forEach((el) => {
+    if (el === id) {
+      // se estiver:
+      popupFavBtn.dataset.favorite = "true";
+      popupFavBtn.style.background = "var(--color-white-primary-50)";
+      popupFavBtn.children[0].src = "icons/bg_red_favorited.svg";
+      // console.log("favorito");
+    }
+  });
+  popupAddFav(id);
+}
+
+// adicionar ou remover favorito via popup
+let favController;
+
+function popupAddFav(id) {
+  if (favController) favController.abort();
+
+  favController = new AbortController();
+  const { signal } = favController;
+
+  popupFavBtn.addEventListener(
+    "click",
+    (el) => {
+      const btnFav = el.target.closest('[data-button-favorite="available"]');
+      if (!btnFav) return;
+      el.preventDefault();
+
+      // não está na lista de favoritos (adicionar)
+      if (!popupFavBtn.dataset.favorite) {
+        popupFavBtn.dataset.favorite = "true";
+        popupFavBtn.style.background = "var(--color-white-primary-50)";
+        popupFavBtn.children[0].src = "icons/bg_red_favorited.svg";
+
+        // atualizar dados salvos localmente
+        favoritesList = [...new Set([...favoritesList, id])];
+      } else {
+        popupFavBtn.dataset.favorite = "";
+        popupFavBtn.style.background = "var(--color-white-primary-20)";
+        popupFavBtn.children[0].src = "icons/white_favorite.svg";
+
+        favoritesList = favoritesList.filter((idLocal) => idLocal !== id);
+      }
+      saveLocal();
+    },
+    { signal },
+  );
+}

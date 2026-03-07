@@ -16,6 +16,7 @@
   --color-red-primary-10: rgba(255, 60, 60, 0.1);
   /* yellow */
   --color-yellow-primary: #ffca02;
+  --color-yellow-primary-60: rgba(255, 202, 2, 0.6);
   --color-yellow-primary-15: #ffca0026;
 
   /* background */
@@ -612,12 +613,26 @@ a {
 .btn-back-to-top .arrow-to-top {
   transform: rotate(-90deg);
 }
-.btn-back-to-top #back-to-top--animate-pokemon[data-status="active"] {
-  width: 96px;
-  margin-top: -80px;
+@keyframes backToTop {
+  from {
+    opacity: 0.5;
+    width: 0px;
+    margin-top: 0px;
+  }
+  to {
+    width: 96px;
+    margin-top: -80px;
+    opacity: 1;
+  }
 }
-.btn-back-to-top #back-to-top--animate-pokemon[data-status="inactive"] {
+.btn-back-to-top #back-to-top--animate-pokemon[data-status="active"] {
+  animation: backToTop 0.5s linear forwards;
+}
+.btn-back-to-top img[data-back-top="hidden"] {
   display: none;
+}
+.btn-back-to-top img[data-back-top="visible"] {
+  display: flex;
 }
 
 /* footer */
@@ -789,6 +804,14 @@ footer .body-default {
   }
   .link-desktop[data-sorting="active"] {
     display: none;
+  }
+
+  /* back to top */
+  .btn-back-to-top {
+    bottom: 8%;
+    right: 4%;
+    width: 32px;
+    height: 32px;
   }
 
   footer {

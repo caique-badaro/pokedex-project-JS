@@ -1,4 +1,5 @@
 import { loadingAll, allPokemons } from "./filterPokemon.js";
+import { popupFavoritePokemon } from "./favoritePokemon.js";
 
 // estrutura do modal
 const popup = document.getElementById("modal-pokemon-details");
@@ -48,6 +49,7 @@ function loadContent(pokemon) {
   try {
     // id
     data.id.innerText = `# ${pokemon.id}`;
+    data.id.dataset.idPokemon = pokemon.id;
 
     // background modal
     data.bgHeader.className = "";
@@ -135,6 +137,9 @@ function loadContent(pokemon) {
     // poder total
     let power = data.specialSkills.children[3].querySelector(".h6");
     power.innerText = pokemon.power;
+
+    // verifica se o pokemon está na lista de favoritos
+    popupFavoritePokemon(Number(data.id.dataset.idPokemon));
   } catch (error) {
     console.error("Falha no carregamento dos dados", error);
   }
@@ -156,6 +161,7 @@ surprisePokemon.forEach((btnSurprise) => {
     let randomId = Math.floor(Math.random() * (max - min + 1) + min);
 
     pokemonDetails(randomId);
+    popupFavoritePokemon(randomId);
   });
 });
 
@@ -192,8 +198,4 @@ document.addEventListener("click", (e) => {
 
   pokemonDetails(pokemonId);
 });
-
-function toggleStatus(el) {
-  el.dataset.status = el.dataset.status === "active" ? "inactive" : "active";
-}
 fecharModal();
