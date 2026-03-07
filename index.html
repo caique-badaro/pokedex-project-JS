@@ -145,14 +145,15 @@
     </div>
 
     <div class="btn-back-to-top">
-      <!-- <img
+      <img
         class="arrow-to-top"
+        data-back-top="visible"
         src="icons/gray_arrow_forward.svg"
-        alt=""
-        srcset="" /> -->
+        alt="subir" />
       <img
         id="back-to-top--animate-pokemon"
         data-status="active"
+        data-back-top="hidden"
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/6.gif"
         alt="" />
     </div>
@@ -169,10 +170,10 @@
       <div id="popup-bg-color" class="card--image-content grass">
         <div class="card-header">
           <div id="popup-pokemon-id" class="tag-id">
-            <p class="body-larger text-bold">#999</p>
+            <p class="body-larger text-bold" data-id-pokemon="999">#999</p>
           </div>
           <div class="action-btn">
-            <button class="btn-favorite">
+            <button class="btn-favorite" data-button-favorite="available">
               <img
                 src="icons/white_favorite.svg"
                 alt="Favoritar"

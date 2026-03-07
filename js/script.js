@@ -8,7 +8,9 @@ import {
   loadingLocalData,
 } from "./modules/favoritePokemon.js";
 import { sortCards } from "./modules/sortingFilters.js";
+import { backToTop } from "./modules/back-to-top.js";
 
 pokeapi();
 await loadMore();
 loadingLocalData();
+backToTop();

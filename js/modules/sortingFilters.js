@@ -39,7 +39,6 @@ function applySorting(orderValue) {
     });
     sortedCards(result);
   }
-
   // id: maior - menor
   if (orderValue === "0-9" || orderValue === "9-0") {
     const result = cards.toSorted((a, b) => {
@@ -143,6 +142,7 @@ fetch("./partials/sorting-options.html")
           btnClear.addEventListener("click", () => {
             document.querySelector(".value-filter").remove();
             if (mobileFeedback) mobileFeedback.innerHTML = "";
+            applySorting("0-9");
           });
         }
 
