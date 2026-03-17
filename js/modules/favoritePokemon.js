@@ -223,7 +223,6 @@ export function popupFavoritePokemon(id) {
       popupFavBtn.dataset.favorite = "true";
       popupFavBtn.style.background = "var(--color-white-primary-50)";
       popupFavBtn.children[0].src = "icons/bg_red_favorited.svg";
-      // console.log("favorito");
     }
   });
   popupAddFav(id);
@@ -245,11 +244,32 @@ function popupAddFav(id) {
       if (!btnFav) return;
       el.preventDefault();
 
+      // identificando o id do pokemon no popup
+      let currentCard = document
+        .querySelector(".body-larger[data-id-pokemon]")
+        .innerText.replace("# ", "");
+
+      console.log(currentCard);
+
+      // variavel com o card exibido no popup
+      let card = document.querySelector(
+        `.card-pokemon[data-id="${currentCard}"]`,
+      );
+
+      console.log(card);
+
       // não está na lista de favoritos (adicionar)
       if (!popupFavBtn.dataset.favorite) {
         popupFavBtn.dataset.favorite = "true";
         popupFavBtn.style.background = "var(--color-white-primary-50)";
         popupFavBtn.children[0].src = "icons/bg_red_favorited.svg";
+
+        //atualizar card em segundo plano
+        let btnFav = card.querySelector(".btn-favorite");
+
+        btnFav.dataset.favorite = "true";
+        btnFav.style.background = "var(--color-white-primary-50)";
+        btnFav.children[0].src = "icons/bg_red_favorited.svg";
 
         // atualizar dados salvos localmente
         favoritesList = [...new Set([...favoritesList, id])];
@@ -258,6 +278,14 @@ function popupAddFav(id) {
         popupFavBtn.style.background = "var(--color-white-primary-20)";
         popupFavBtn.children[0].src = "icons/white_favorite.svg";
 
+        //atualizar card em segundo plano
+        let btnFav = card.querySelector(".btn-favorite");
+
+        btnFav.dataset.favorite = "";
+        btnFav.style.background = "var(--color-white-primary-20)";
+        btnFav.children[0].src = "icons/white_favorite.svg";
+
+        // removi da lista de favoritos
         favoritesList = favoritesList.filter((idLocal) => idLocal !== id);
       }
       saveLocal();
