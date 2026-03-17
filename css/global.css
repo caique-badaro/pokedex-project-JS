@@ -607,8 +607,14 @@ a {
   box-shadow: var(--shadow-card);
   cursor: pointer;
   position: fixed;
-  bottom: 4%;
   right: 4%;
+  transition: bottom 0.4s ease-in-out;
+}
+.btn-back-to-top[data-status="hidden"] {
+  bottom: -8%;
+}
+.btn-back-to-top[data-status="visible"] {
+  bottom: 4%;
 }
 .btn-back-to-top .arrow-to-top {
   transform: rotate(-90deg);
