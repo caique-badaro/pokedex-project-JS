@@ -813,11 +813,8 @@ footer .body-default {
   }
 
   /* back to top */
-  .btn-back-to-top {
+  .btn-back-to-top[data-status="visible"] {
     bottom: 8%;
-    right: 4%;
-    width: 32px;
-    height: 32px;
   }
 
   footer {
