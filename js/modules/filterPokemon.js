@@ -111,6 +111,12 @@ export function filterTag(elements) {
         loadingLocalData();
       }
       window.scrollTo(0, 0);
+
+      // limpar filtros aplicados
+      if (document.querySelector(".value-filter"))
+        document.querySelector(".value-filter").remove();
+      if (document.getElementsByClassName("mobile-feedback"))
+        document.getElementsByClassName("mobile-feedback")[0].innerHTML = "";
     });
   });
 }
