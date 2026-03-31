@@ -500,6 +500,12 @@ a {
   padding: 0 10%;
 }
 
+.carousel-window {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
 /* Largura da barra de rolagem */
 .carousel::-webkit-scrollbar {
   display: none;
@@ -788,21 +794,22 @@ footer .body-default {
   .link-mobile .icon-container img {
     opacity: 0.8;
   }
+
+  /* tags */
   .carousel-class {
     padding: 0;
     box-sizing: border-box;
-  }
-  .carousel-class .tag-class:first-child {
-    margin-left: 5%;
-  }
-  .carousel-class div:last-child {
-    margin-right: 5%;
   }
   .carousel-class .arrow-carousel {
     display: none;
   }
   .carousel-class .tag-class .body-larger {
     display: flex;
+  }
+  .carousel-window #classTag {
+    gap: 0.5rem;
+    padding: 5%;
+    width: auto;
   }
 
   .content-block {

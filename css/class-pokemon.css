@@ -56,7 +56,17 @@
   display: flex;
   gap: 1rem;
 }
+
 /* ---- tag classe */
+#classTag {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  transition: transform 0.4s ease-out;
+  will-change: transform;
+  flex-wrap: nowrap;
+}
+
 .tag-class {
   display: flex;
   gap: 0.25rem;
@@ -66,7 +76,9 @@
   border-radius: 999px;
   cursor: pointer;
   box-shadow: var(--shadow-card);
+  flex-shrink: 0;
 }
+
 .tag-class .icon-class-pk {
   width: 1.25rem;
   height: auto;

@@ -237,7 +237,7 @@ export function popupFavoritePokemon(id) {
 // adicionar ou remover favorito via popup
 let favController;
 
-function popupAddFav(id) {
+export function popupAddFav(id) {
   if (favController) favController.abort();
 
   favController = new AbortController();
@@ -267,11 +267,13 @@ function popupAddFav(id) {
         popupFavBtn.children[0].src = "icons/bg_red_favorited.svg";
 
         //atualizar card em segundo plano
-        let btnFav = card.querySelector(".btn-favorite");
+        if (card) {
+          let btnFav = card.querySelector(".btn-favorite");
 
-        btnFav.dataset.favorite = "true";
-        btnFav.style.background = "var(--color-white-primary-50)";
-        btnFav.children[0].src = "icons/bg_red_favorited.svg";
+          btnFav.dataset.favorite = "true";
+          btnFav.style.background = "var(--color-white-primary-50)";
+          btnFav.children[0].src = "icons/bg_red_favorited.svg";
+        }
 
         // atualizar dados salvos localmente
         favoritesList = [...new Set([...favoritesList, id])];
@@ -281,16 +283,25 @@ function popupAddFav(id) {
         popupFavBtn.children[0].src = "icons/white_favorite.svg";
 
         //atualizar card em segundo plano
-        let btnFav = card.querySelector(".btn-favorite");
+        if (card) {
+          let btnFav = card.querySelector(".btn-favorite");
 
-        btnFav.dataset.favorite = "";
-        btnFav.style.background = "var(--color-white-primary-20)";
-        btnFav.children[0].src = "icons/white_favorite.svg";
+          btnFav.dataset.favorite = "";
+          btnFav.style.background = "var(--color-white-primary-20)";
+          btnFav.children[0].src = "icons/white_favorite.svg";
+        }
 
         // removi da lista de favoritos
         favoritesList = favoritesList.filter((idLocal) => idLocal !== id);
       }
       saveLocal();
+      // atualizar contadores + tag no front
+      favCount = favoritesList.length;
+      tagCounter.forEach((tag) => {
+        if (!tag) return;
+        tag.dataset.status = favCount > 0 ? "active" : "inactive";
+        tag.innerText = favCount;
+      });
     },
     { signal },
   );

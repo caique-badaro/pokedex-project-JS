@@ -1,5 +1,5 @@
 import { loadingAll, allPokemons } from "./filterPokemon.js";
-import { popupFavoritePokemon } from "./favoritePokemon.js";
+import { popupFavoritePokemon, popupAddFav } from "./favoritePokemon.js";
 
 // estrutura do modal
 const popup = document.getElementById("modal-pokemon-details");

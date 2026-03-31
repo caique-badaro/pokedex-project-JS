@@ -8,7 +8,8 @@ import {
   loadingLocalData,
 } from "./modules/favoritePokemon.js";
 import { sortCards } from "./modules/sortingFilters.js";
-import { backToTop } from "./modules/back-to-top.js";
+import { backToTop } from "./modules/backToTop.js";
+import {} from "./modules/moveCarouselTags.js";
 
 pokeapi();
 await loadMore();
