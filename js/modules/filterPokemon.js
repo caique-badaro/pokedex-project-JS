@@ -2,6 +2,7 @@ import { pokeapi } from "./pokeapi.js";
 import { createCard } from "./createCard.js";
 import { stopAutoLoading } from "./loadMore.js";
 import { loadingLocalData } from "./favoritePokemon.js";
+import { moveCarouselTags } from "./moveCarouselTags.js";
 
 // array global com todos os pokémons
 export const allPokemons = await loadingAll();
@@ -44,6 +45,7 @@ export function createTags(tags) {
 
     carouselTags.appendChild(tagStructure);
   });
+  moveCarouselTags();
 }
 
 const tagList = document.querySelectorAll(".tag-class");
