@@ -1,11 +1,12 @@
 <a name="top"></a>
 
+
+
+<h1 align="center">Curso de JavaScript: Pokédex</h1>
 <p align="center">
   <img src="https://caique-badaro.github.io/pokedex-project-JS/imgs/readme_thumb_caique-badaro.png" width="80%">
 </p>
-
-<h1 align="center">Curso de JavaScript: Pokédex</h1>
-<h6 align="center">Ordene, filtre, pesquise e favorite seus pokémons preferidos</h6>
+<h3 align="center">Ordene, filtre, pesquise e favorite seus pokémons preferidos</h3>
 <p align="center"> <a href="https://caique-badaro.github.io/pokedex-project-JS/" target="_blank">🔗 Acessar projeto</a> </p>
 <h1> </h1>
 <br/>
