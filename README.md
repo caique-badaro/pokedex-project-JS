@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">Curso de JavaScript: Pokédex</h1>
-<h3 align="center">Aplicação web que consome dados em tempo real e gera interface dinâmica baseada em API.</h3>
+<h3 align="center">Aplicação que consome dados em tempo real e gera interface dinâmica baseada em API</h3>
 <p align="center">
   <a href="https://caique-badaro.github.io/pokedex-project-JS/" target="_blank">🔗 Acessar Pokédex</a>
 </p>
